@@ -1,14 +1,12 @@
+import type { createItems } from "$lib/items/main.svelte";
 import { newPlayerStats } from "$lib/utils/difficulty";
+import { setupHealth } from "$lib/utils/health.svelte";
+import { ExperienceBase } from "$lib/utils/leveling.svelte";
+import { setupProcs } from "./procs.svelte";
 
-export class Player {
+export class Player extends ExperienceBase {
   stats = $state<PlayerStats>(newPlayerStats);
-  level = $state<number>(1);
-  exp = $state<number>(0);
-  expNextLevel = $derived.by(() => {
-    if (this.level < 3) return (this.level + 1) * 100;
-    if (this.level < 5) return (this.level + 1) * 150;
-    if (this.level < 7) return (this.level + 1) * 230;
-    if (this.level < 9) return (this.level + 1) * 400;
-    return (this.level + 1) * 1000;
-  });
+  health = setupHealth(this.stats.health);
+  items = $state<ReturnType<typeof createItems>[]>([]);
+  procs = $state(setupProcs());
 }

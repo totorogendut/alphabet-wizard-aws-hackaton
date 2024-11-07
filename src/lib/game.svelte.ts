@@ -17,7 +17,7 @@ class GameState {
   player = $state<Player>(new Player());
   isPaused = $state<boolean>(false);
   enemies = $state<ReturnType<typeof createEnemyEntity>[]>([]);
-  isDefeated = $derived<boolean>(this.player.stats.health <= 0);
+  isDefeated = $derived<boolean>(this.player.health.current <= 0);
   difficulty = $state<Difficulty>("medium");
   keyboard = new KeyboardSetup();
   spawnPool = $state<ReturnType<typeof enemySpawnGenerator>[]>([]);
@@ -35,6 +35,8 @@ export function gameTick() {
   spawnEnemies();
   castSpells();
   moveEnemies();
+
+  game.player.procs.onGameTick();
 }
 
 export let game = new GameState("medium");

@@ -4,7 +4,7 @@
   function onSubmit(e: Event) {
     e.preventDefault();
     game.keyboard.text = "";
-    game.player.exp += 50;
+    game.player.exp += 60;
   }
 </script>
 

@@ -36,3 +36,8 @@ interface Buff extends BuffBase {}
 interface Debuff extends BuffBase {
   isDispellable: boolean;
 }
+
+interface Proc {
+  chance: number;
+  fn: () => void;
+}

@@ -1,14 +1,18 @@
+import { setupHealth } from "$lib/utils/health.svelte";
+import { setupPosition } from "$lib/utils/position.svelte";
 import { nanoid } from "nanoid";
 
 export type EnemyEntity = ReturnType<typeof createEnemyEntity>;
 
 export function createEnemyEntity(data: EnemyStats) {
   const id = nanoid();
-  let x = $state(Math.max(Math.random() * 90, 10));
-  let y = $state(0);
+  const pos = setupPosition({
+    x: Math.max(Math.random() * 90, 10),
+    y: 0,
+  });
   const buffs = $state<Buff[]>([]);
   const debuffs = $state<Debuff[]>([]);
-  let health = $state(data.health);
+  const health = setupHealth(data.health);
   const armor = $derived(applyBonus("armor"));
   const speed = $derived(applyBonus("speed"));
   const damage = $derived(applyBonus("damage"));
@@ -21,7 +25,7 @@ export function createEnemyEntity(data: EnemyStats) {
     stun: applyBonus("stun", "resistance"),
     physical: applyBonus("physical", "resistance"),
   });
-  const hasArrived = $derived(y >= 100);
+  const hasArrived = $derived(pos.y >= 100);
 
   type BuffKeys = Exclude<keyof BuffBase, "duration">;
   function applyBonus(
@@ -54,8 +58,14 @@ export function createEnemyEntity(data: EnemyStats) {
   }
 
   return {
+    get health() {
+      return health;
+    },
     get id() {
       return id;
+    },
+    get pos() {
+      return pos;
     },
     get sprite() {
       return data.sprite;
@@ -83,24 +93,6 @@ export function createEnemyEntity(data: EnemyStats) {
     },
     get armor() {
       return armor;
-    },
-    get x() {
-      return x;
-    },
-    set x(val: number) {
-      x = val;
-    },
-    get y() {
-      return y;
-    },
-    set y(val: number) {
-      y = Math.min(val, 100);
-    },
-    get health() {
-      return health;
-    },
-    set health(val: number) {
-      health = val;
     },
   };
 }

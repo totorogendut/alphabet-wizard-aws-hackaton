@@ -6,10 +6,10 @@ import { nanoid } from "nanoid";
 export function moveEnemies() {
   for (let i = 0; i < game.enemies.length; i++) {
     const enemy = game.enemies[i];
-    enemy.y += enemy.speed;
+    enemy.pos.y += enemy.speed;
 
-    if (enemy.y >= 100) {
-      game.player.stats.health -= enemy.damage;
+    if (enemy.pos.y >= 100) {
+      game.player.health.current -= enemy.damage;
       game.enemies.splice(i, 1);
     }
   }

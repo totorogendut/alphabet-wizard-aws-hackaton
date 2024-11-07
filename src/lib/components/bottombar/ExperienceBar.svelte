@@ -2,9 +2,8 @@
   import { game } from "$lib/game.svelte";
 
   $effect(() => {
-    if (game.player.exp >= game.player.expNextLevel) {
-      game.player.exp -= game.player.expNextLevel;
-      game.player.level++;
+    if (game.player.level > 1) {
+      console.log("level up");
     }
   });
 </script>
