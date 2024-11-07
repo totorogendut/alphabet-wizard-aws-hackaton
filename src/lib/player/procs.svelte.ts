@@ -1,30 +1,10 @@
 import { game } from "$lib/game.svelte";
 
 export function setupProcs() {
-  const kill = $derived<Proc[]>(
-    game.player.items
-      .filter((item) => Boolean(item.procs.onKill))
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      .map((item) => item.procs.onKill!)
-  );
-  const spellHit = $derived(
-    game.player.items
-      .filter((item) => Boolean(item.procs.onSpellHit))
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      .map((item) => item.procs.onSpellHit!)
-  );
-  const gettingHit = $derived(
-    game.player.items
-      .filter((item) => Boolean(item.procs.onGettingHit))
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      .map((item) => item.procs.onGettingHit!)
-  );
-  const gameTick = $derived(
-    game.player.items
-      .filter((item) => Boolean(item.procs.onGameTick))
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      .map((item) => item.procs.onGameTick!)
-  );
+  const kill = $derived(deriveProcsFromItems("onKill"));
+  const spellHit = $derived(deriveProcsFromItems("onSpellHit"));
+  const gettingHit = $derived(deriveProcsFromItems("onGettingHit"));
+  const gameTick = $derived(deriveProcsFromItems("onGameTick"));
 
   return {
     onKill: () => triggerProc(kill),
@@ -32,6 +12,15 @@ export function setupProcs() {
     onGettingHit: () => triggerProc(gettingHit),
     onGameTick: () => triggerProc(gameTick),
   };
+}
+
+function deriveProcsFromItems(key: keyof Item["procs"]): Proc[] {
+  return (
+    game.player.items
+      .filter((item) => key in item.procs)
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      .map((item) => item.procs[key]!)
+  );
 }
 
 function triggerProc(proc: Proc[]) {
