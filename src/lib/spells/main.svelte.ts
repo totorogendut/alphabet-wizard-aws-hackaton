@@ -1,10 +1,10 @@
-import { game } from "./game.svelte";
-import { fireball } from "./spells/fire";
+import { game } from "$lib/game.svelte";
+import { fireball } from "./fire";
 
 export class Spells {
+  cooldown = $state(0);
   level = $state(1);
   exp = $state(0);
-  cooldown = $state(0);
   expNextLevel = $derived.by(() => {
     if (this.level < 3) return (this.level + 1) * 100;
     if (this.level < 5) return (this.level + 1) * 150;
@@ -47,7 +47,7 @@ export class Spells {
       this.cast();
       this.cooldown = this.spell?.cooldown || 1;
     } else {
-      this.cooldown -= game.player.speed;
+      this.cooldown -= game.player.stats.speed;
     }
   }
 

@@ -1,4 +1,4 @@
-interface EnemyState extends BaseStats {
+interface EnemyStats extends BaseStats {
   stringComplexity: number; // between 1 ~ 10
   sprite: string; // starts with /sprites/<type>/<key>.png
   size: number; // between 2 ~ 6

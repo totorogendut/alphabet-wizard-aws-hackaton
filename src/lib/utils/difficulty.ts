@@ -1,6 +1,6 @@
 export type Difficulty = "easy" | "medium" | "hard";
 
-export const newPlayerState: PlayerState = {
+export const newPlayerStats: PlayerStats = {
   health: 300,
   regenation: 0,
   speed: 1,

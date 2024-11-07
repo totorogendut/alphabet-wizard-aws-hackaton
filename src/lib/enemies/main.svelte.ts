@@ -1,5 +1,5 @@
-import { createEnemyEntity } from "$lib/enemy/_store.svelte";
-import { animalEnemies } from "$lib/enemy/animals";
+import { createEnemyEntity } from "$lib/enemies/_store.svelte";
+import { animalEnemies } from "$lib/enemies/animals";
 import { game } from "$lib/game.svelte";
 import { nanoid } from "nanoid";
 
@@ -9,7 +9,7 @@ export function moveEnemies() {
     enemy.y += enemy.speed;
 
     if (enemy.y >= 100) {
-      game.player.health -= enemy.damage;
+      game.player.stats.health -= enemy.damage;
       game.enemies.splice(i, 1);
     }
   }
@@ -31,7 +31,7 @@ export function spawnEnemies() {
   game.spawnPool = game.spawnPool.filter(({ spawn }) => Boolean(spawn));
 }
 
-export function enemySpawnGenerator(enemy: EnemyState) {
+export function enemySpawnGenerator(enemy: EnemyStats) {
   let spawn = $state(enemy.spawn);
 
   return {

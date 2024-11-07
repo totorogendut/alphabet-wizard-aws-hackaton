@@ -1,4 +1,4 @@
-export const animalEnemies: Record<string, EnemyState> = {
+export const animalEnemies: Record<string, EnemyStats> = {
   wolf: {
     stringComplexity: 5,
     regenation: 0,

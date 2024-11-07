@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EnemyEntity } from "$lib/enemy/_store.svelte";
+  import type { EnemyEntity } from "$lib/enemies/_store.svelte";
 
   interface Props {
     data: EnemyEntity;

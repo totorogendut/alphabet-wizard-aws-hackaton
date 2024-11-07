@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 
 export type EnemyEntity = ReturnType<typeof createEnemyEntity>;
 
-export function createEnemyEntity(data: EnemyState) {
+export function createEnemyEntity(data: EnemyStats) {
   const id = nanoid();
   let x = $state(Math.max(Math.random() * 90, 10));
   let y = $state(0);

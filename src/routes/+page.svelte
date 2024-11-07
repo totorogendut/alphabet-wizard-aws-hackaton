@@ -7,7 +7,7 @@
   import BottomBarContainer from "$lib/components/bottombar/BottomBarContainer.svelte";
 </script>
 
-{#if game?.player?.health}
+{#if game.player.stats.health}
   <main class="play">
     <ArenaContainer />
     <SideBarContainer />
