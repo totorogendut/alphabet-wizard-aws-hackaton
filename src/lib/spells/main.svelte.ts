@@ -1,10 +1,11 @@
 import { game } from "$lib/game.svelte";
 import { Player } from "$lib/player/main.svelte";
-import { ExperienceBase } from "$lib/utils/leveling.svelte";
+import { LevelingBase } from "$lib/utils/leveling.svelte";
 import { fireball } from "./fire";
 
 type SpellsType = ProjectileSpell | AreaSpell | DurationSpell;
-export class Spells extends ExperienceBase {
+export class Spells {
+  level = new LevelingBase();
   cooldown = $state(0);
   instances = $state([]);
   spell = $state<SpellsType>();
@@ -20,7 +21,6 @@ export class Spells extends ExperienceBase {
   });
 
   constructor(spell: SpellsType) {
-    super();
     this.spell = spell;
   }
 

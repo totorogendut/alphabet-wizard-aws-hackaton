@@ -15,6 +15,7 @@ export function setupProcs() {
 }
 
 function deriveProcsFromItems(key: keyof Item["procs"]): Proc[] {
+  if (!game?.player?.items) return [];
   return (
     game.player.items
       .filter((item) => key in item.procs)

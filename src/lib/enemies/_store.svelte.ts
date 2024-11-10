@@ -1,3 +1,4 @@
+import { game } from "$lib/game.svelte";
 import { setupHealth } from "$lib/utils/health.svelte";
 import { setupPosition } from "$lib/utils/position.svelte";
 import { nanoid } from "nanoid";
@@ -58,6 +59,11 @@ export function createEnemyEntity(data: EnemyStats) {
   }
 
   return {
+    attack() {
+      const index = game.enemies.findIndex((enemy) => enemy.id === id);
+      game.enemies.splice(index, 1);
+      game.player.health.current -= damage;
+    },
     get health() {
       return health;
     },

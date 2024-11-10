@@ -1,23 +1,62 @@
-export class ExperienceBase {
-  level = $state<number>(1);
+export class LevelingBase {
+  #MAX_LEVEL = 100;
   #exp = $state<number>(0);
-  expNextLevel = $derived.by(() => {
-    if (this.level < 3) return (this.level + 1) * 100;
-    if (this.level < 5) return (this.level + 1) * 150;
-    if (this.level < 7) return (this.level + 1) * 230;
-    if (this.level < 9) return (this.level + 1) * 400;
-    return (this.level + 1) * 1000;
-  });
+  current = $state<number>(1);
+  expForNextLevel = $state(100);
+  points = $state(0);
+
+  constructor(opts?: { maxLevel: number }) {
+    if (opts?.maxLevel) this.#MAX_LEVEL = opts.maxLevel;
+
+    $effect.root(() => {
+      $effect(() => {
+        if (this.current > 1) this.levelUp();
+      });
+    });
+  }
+
+  levelUp() {
+    this.points += 5;
+  }
 
   set exp(val: number) {
     this.#exp = val;
-    if (this.#exp >= this.expNextLevel) {
-      this.#exp -= this.expNextLevel;
-      this.level++;
+    if (this.#exp >= this.expForNextLevel && this.current < this.#MAX_LEVEL) {
+      this.current++;
+      if (this.current < this.#MAX_LEVEL) {
+        this.#exp -= this.expForNextLevel;
+        this.expForNextLevel += nextLevelFactor(this.current);
+      } else {
+        this.#exp = this.expForNextLevel;
+      }
     }
   }
 
   get exp() {
     return this.#exp;
   }
+}
+
+export class PlayerLeveling extends LevelingBase {
+  constructor() {
+    super({
+      maxLevel: 100,
+    });
+  }
+}
+
+export class SpellLeveling extends LevelingBase {
+  constructor() {
+    super({
+      maxLevel: 10,
+    });
+  }
+}
+
+function nextLevelFactor(level: number) {
+  if (level < 3) return level * 100;
+  if (level < 5) return level * 150;
+  if (level < 7) return level * 230;
+  if (level < 9) return level * 400;
+  return level * 1000;
 }

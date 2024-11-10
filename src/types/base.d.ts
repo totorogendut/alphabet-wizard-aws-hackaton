@@ -38,6 +38,7 @@ interface Debuff extends BuffBase {
 }
 
 interface Proc {
+  label: string;
   chance: number;
   fn: () => void;
 }

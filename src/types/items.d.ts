@@ -1,5 +1,6 @@
 interface Item {
   cost: Resource[];
+  isCostSufficient?: boolean;
   buffs: Buff[];
   procs: {
     onKill?: Proc;
@@ -7,4 +8,5 @@ interface Item {
     onGettingHit?: Proc;
     onGameTick?: Proc;
   };
+  icon: string;
 }
