@@ -3,6 +3,7 @@
   import ExperienceBar from "./ExperienceBar.svelte";
   import KeyboardText from "./KeyboardText.svelte";
   import PlayerStats from "./PlayerStats.svelte";
+  import Resources from "./Resources.svelte";
 </script>
 
 <footer class="bg-red-900 relative pt-4 px-4">
@@ -11,6 +12,7 @@
     <PlayerStats />
     <KeyboardText />
   </div>
+  <Resources />
 </footer>
 
 <style lang="postcss">

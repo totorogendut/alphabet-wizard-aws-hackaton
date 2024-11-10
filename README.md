@@ -1,38 +1,23 @@
-# sv
+# Alphabest WiZard
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Alphabet Wizard is a web-based game that rely entirely on DOM elements to render the game. It uses Svelte 5's Runes as its primary reactivity system to manage complex states and interactions.
 
-## Creating a project
+## Aknowledgement
 
-If you're seeing this, you've probably already done this step. Congrats!
+Made for Amazon Game Build Hackaton 2024 (for the usage of Amazon Q) and SvelteHack 2024 (for usage of Svelte and Runes).
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Credits (Assets)
 
-# create a new project in my-app
-npx sv create my-app
-```
+Explosion pack - https://ansimuz.itch.io/ 
 
-## Developing
+Pixel Food - https://henrysoftware.itch.io/pixel-food
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Verboten Arcane Stash - https://pixerelia.itch.io/vas-basic-spells-and-buffs
 
-```bash
-npm run dev
+Tiny RPG Asset Pack - https://zerie.itch.io/tiny-rpg-character-asset-pack
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Pixel Art Skill Icons Pack - https://quintino-pixels.itch.io/free-pixel-art-skill-icons-pack
 
-## Building
+Inventory Assets Pack - https://elvgames.itch.io/free-inventory-asset-pack
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Item Packs - https://glionox.itch.io/items16
