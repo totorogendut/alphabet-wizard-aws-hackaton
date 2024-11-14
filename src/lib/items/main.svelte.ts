@@ -1,3 +1,4 @@
 export function createItems(item: Item): Item {
-  return item;
+  const data = $state(item);
+  return data;
 }

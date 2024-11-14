@@ -11,7 +11,7 @@
   ]);
 </script>
 
-<div class="flex gap-2">
+<div class="flex gap-2 self-end">
   {#each resources as { name, amount, icon }}
     <div class="flex flex-col items-center w-12 font-extrabold text-white">
       <img width="20" height="20" src={icon} alt={name} />

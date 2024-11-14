@@ -11,7 +11,7 @@ import {
   type enemySpawnGenerator,
 } from "./enemies/main.svelte";
 import { castSpells } from "./utils/spells";
-import { ResourcesData } from "./resources/main.svelte";
+import { ResourcesData, setupResources } from "./resources/main.svelte";
 
 class GameState {
   arena = $state() as ArenaState;
@@ -21,6 +21,7 @@ class GameState {
   resources = new ResourcesData();
   isPaused = $state<boolean>(false);
   enemies = $state<ReturnType<typeof createEnemyEntity>[]>([]);
+  items = $state<Item[]>([]);
   isDefeated = $derived<boolean>(this.player.health.current <= 0);
   difficulty = $state<Difficulty>("medium");
   spawnPool = $state<ReturnType<typeof enemySpawnGenerator>[]>([]);

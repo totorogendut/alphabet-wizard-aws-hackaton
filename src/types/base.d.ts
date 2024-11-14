@@ -25,15 +25,18 @@ interface ResourceState {
 }
 
 interface BuffBase {
-  duration: number;
-  speed: number;
-  armor: number;
-  damage: number;
-  resistance: Resistance;
+  // buff base can only consist of one of the stats below
+  speed?: number;
+  armor?: number;
+  damage?: number;
+  resistance?: Partial<Resistance>;
 }
 
-interface Buff extends BuffBase {}
+interface Buff extends BuffBase {
+  duration: number;
+}
 interface Debuff extends BuffBase {
+  duration: number;
   isDispellable: boolean;
 }
 

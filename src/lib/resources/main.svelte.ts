@@ -37,3 +37,43 @@ export class ResourcesData {
     icon: stone,
   });
 }
+
+export function setupResources() {
+  const data = $state([
+    {
+      name: "gold",
+      amount: 150,
+      icon: gold,
+    },
+    {
+      name: "lumber",
+      amount: 0,
+      icon: lumber,
+    },
+    {
+      name: "quartz",
+      amount: 0,
+      icon: quartz,
+    },
+    {
+      name: "amber",
+      amount: 0,
+      icon: amber,
+    },
+    {
+      name: "stone",
+      amount: 0,
+      icon: stone,
+    },
+    {
+      name: "food",
+      amount: 100,
+      icon: food,
+    },
+  ]);
+  return data;
+
+  function del() {
+    // const index = game.resources.findIndex((res) => res.name === name);
+  }
+}

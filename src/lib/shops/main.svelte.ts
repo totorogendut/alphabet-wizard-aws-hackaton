@@ -1,29 +1,29 @@
 import { game } from "$lib/game.svelte";
+import { items } from "$lib/items/items";
+import type { ResourcesKey } from "$lib/resources/helper";
 
-type ResourceKey = keyof typeof game.resources;
-export function createItemListing(item: Item): Item {
-  const cost = $state(item.cost);
+export function createItemListing(item: Item): Item & { buy: () => void } {
+  const data = $state(item);
   const isCostSufficient = $derived(
-    cost.every(({ amount, name }) => {
-      return game.resources[name as ResourceKey].amount >= amount;
+    item.cost.every(({ amount, name }) => {
+      return game.resources[name as ResourcesKey].amount >= amount;
     })
   );
-  const procs = $state(item.procs);
-  const buffs = $state(item.buffs);
 
   return {
-    get cost() {
-      return cost;
-    },
+    ...data,
     get isCostSufficient() {
       return isCostSufficient;
     },
-    get buffs() {
-      return buffs;
+    buy() {
+      if (!isCostSufficient) return;
+      for (const { amount, name } of data.cost) {
+        game.resources[name as ResourcesKey].amount -= amount;
+      }
+
+      game.items.push(item);
     },
-    get procs() {
-      return procs;
-    },
-    icon: item.icon,
   };
 }
+
+export const shops = items.map(createItemListing);
