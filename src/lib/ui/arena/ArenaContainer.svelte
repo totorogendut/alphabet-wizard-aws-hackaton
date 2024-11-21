@@ -5,7 +5,7 @@
 
   $effect(() => {
     game.keyboard.text;
-    untrack(gameTick);
+    untrack(() => gameTick());
   });
 </script>
 

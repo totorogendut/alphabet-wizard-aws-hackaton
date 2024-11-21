@@ -1,37 +1,44 @@
-export function setupHealth(val: number) {
-  let max = $state(val);
-  let current = $state(val);
-  const percentage = $derived(current / max);
-  const isLowHealth = $derived(percentage <= 0.5);
-  const isHighHealth = $derived(percentage >= 0.85);
-  const isFullHealth = $derived(percentage >= 1);
+import { game } from "$lib/game.svelte";
+import { untrack } from "svelte";
 
-  return {
-    get percentage() {
-      return percentage;
-    },
-    get isLowHealth() {
-      return isLowHealth;
-    },
-    get isHighHealth() {
-      return isHighHealth;
-    },
-    get isFullHealth() {
-      return isFullHealth;
-    },
-    get current() {
-      return current;
-    },
-    set current(val: number) {
-      current = Math.max(Math.min(val, max), 0);
-    },
-    get max() {
-      return max;
-    },
-    set max(val: number) {
-      const currentHealth = max / current;
-      max = val;
-      current = max * currentHealth;
-    },
-  };
+export class Health {
+  #max = $state(0);
+  #current = $state(0);
+  #percentage = $derived(this.#current / this.#max);
+  readonly isLowHealth = $derived(this.#percentage <= 0.5);
+  readonly isHighHealth = $derived(this.#percentage >= 0.85);
+  readonly isFullHealth = $derived(this.#percentage >= 1);
+  readonly isAlive = $derived(this.#current > 0);
+
+  constructor(stats: BaseStats) {
+    this.#max = stats.health;
+    this.#current = stats.health;
+
+    $effect.root(() => {
+      $effect(() => {
+        if (!game.turn) return;
+        untrack(() => {
+          this.current += stats.regenation;
+        });
+      });
+    });
+  }
+
+  get max() {
+    return this.#max;
+  }
+  get current() {
+    return this.#current;
+  }
+  get percentage() {
+    return this.#percentage;
+  }
+  set current(val: number) {
+    this.#current = Math.max(Math.min(val, this.#max), 0);
+  }
+  set max(val: number) {
+    const currentHealth = this.#max / this.#current;
+    this.#max = val;
+    this.#current = this.#max * currentHealth;
+  }
 }

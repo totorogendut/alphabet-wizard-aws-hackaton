@@ -1,5 +1,5 @@
 import { game } from "$lib/game.svelte";
-import { setupHealth } from "$lib/utils/health.svelte";
+import { Health } from "$lib/utils/health.svelte";
 import { setupPosition } from "$lib/utils/position.svelte";
 import { nanoid } from "nanoid";
 
@@ -13,7 +13,7 @@ export function createEnemyEntity(data: EnemyStats) {
   });
   const buffs = $state<Buff[]>([]);
   const debuffs = $state<Debuff[]>([]);
-  const health = setupHealth(data.health);
+  const health = new Health(data);
   const armor = $derived(applyBonus("armor"));
   const speed = $derived(applyBonus("speed"));
   const damage = $derived(applyBonus("damage"));

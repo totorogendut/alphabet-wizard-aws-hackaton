@@ -14,6 +14,7 @@ import { castSpells } from "./utils/spells";
 import { ResourcesData, setupResources } from "./resources/main.svelte";
 
 class GameState {
+  turn = $state(0);
   arena = $state() as ArenaState;
   player = new Player();
   keyboard = new KeyboardSetup();
@@ -40,6 +41,7 @@ export function gameTick() {
   moveEnemies();
 
   game.player.procs.onGameTick();
+  game.turn++;
 }
 
 export let game = new GameState("medium");
