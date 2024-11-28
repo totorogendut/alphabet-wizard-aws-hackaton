@@ -30,6 +30,7 @@ interface BuffBase {
   armor?: number;
   damage?: number;
   resistance?: Partial<Resistance>;
+  health?: number;
 }
 
 interface Buff extends BuffBase {

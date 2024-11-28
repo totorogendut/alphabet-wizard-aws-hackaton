@@ -28,6 +28,7 @@ class GameState {
   spawnPool = $state<ReturnType<typeof enemySpawnGenerator>[]>([]);
   spawnTime = $state(10);
   spawnCooldown = $state(this.spawnTime);
+  logs = $state<MessageLogs[]>([]);
 
   constructor(difficulty: Difficulty) {
     this.arena = newGateState[difficulty];

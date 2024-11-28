@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Enemy from "$lib/components/entity/Enemy.svelte";
-  import KeyboardText from "$lib/components/bottombar/KeyboardText.svelte";
   import { game } from "$lib/game.svelte";
   import ArenaContainer from "$lib/ui/arena/ArenaContainer.svelte";
   import SideBarContainer from "$lib/components/sidebar/SideBarContainer.svelte";
@@ -13,6 +11,8 @@
     <SideBarContainer />
     <BottomBarContainer />
   </main>
+{:else}
+  <h1>Dead</h1>
 {/if}
 
 <style lang="postcss">

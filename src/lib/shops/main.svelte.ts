@@ -16,12 +16,24 @@ export function createItemListing(item: Item): Item & { buy: () => void } {
       return isCostSufficient;
     },
     buy() {
-      if (!isCostSufficient) return;
+      if (!isCostSufficient) {
+        game.logs.push({
+          type: "error",
+          text: "Not enough resources",
+        });
+
+        return;
+      }
+
       for (const { amount, name } of data.cost) {
         game.resources[name as ResourcesKey].amount -= amount;
       }
 
       game.items.push(item);
+      game.logs.push({
+        type: "success",
+        text: `Bought ${item.title}`,
+      });
     },
   };
 }

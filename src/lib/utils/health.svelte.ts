@@ -18,6 +18,7 @@ export class Health {
       $effect(() => {
         if (!game.turn) return;
         untrack(() => {
+          if (!this.isAlive) return;
           this.current += stats.regenation;
         });
       });

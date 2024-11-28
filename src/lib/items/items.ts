@@ -4,10 +4,11 @@ export const items: Item[] = [
   {
     title: "Shield",
     description: "A poor man's shield.",
-    cost: [{ amount: 20, name: "gold" }],
+    cost: [{ amount: 10, name: "gold" }],
     buffs: [
       {
         armor: 10,
+        health: 40,
         resistance: {
           cold: 14,
           debuff: 6,
