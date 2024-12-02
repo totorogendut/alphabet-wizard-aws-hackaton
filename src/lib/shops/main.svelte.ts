@@ -29,7 +29,7 @@ export function createItemListing(item: Item): Item & { buy: () => void } {
         game.resources[name as ResourcesKey].amount -= amount;
       }
 
-      game.items.push(item);
+      game.player.items.push(item);
       game.logs.push({
         type: "success",
         text: `Bought ${item.title}`,

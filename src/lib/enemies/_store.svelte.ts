@@ -13,7 +13,7 @@ export function createEnemyEntity(data: EnemyStats) {
   });
   const buffs = $state<Buff[]>([]);
   const debuffs = $state<Debuff[]>([]);
-  const health = new Health(data);
+  const health = new Health(game, data);
   const armor = $derived(applyBonus("armor"));
   const speed = $derived(applyBonus("speed"));
   const damage = $derived(applyBonus("damage"));

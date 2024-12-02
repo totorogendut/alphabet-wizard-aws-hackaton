@@ -7,7 +7,7 @@
 <section class="basis-[30%] p-4 bg-amber-200 text-black/90 shrink-0">
   <strong class="font-bold text-2xl block mb-2">Items</strong>
   <div class="flex gap-2 flex-wrap">
-    {#each game.items as item}
+    {#each game.player.items as item}
       <ItemIcon {...item} />
     {/each}
   </div>

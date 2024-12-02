@@ -20,7 +20,7 @@ export const items: Item[] = [
     description: "Health ring",
     cost: [{ amount: 20, name: "gold" }],
     bonusStats: {
-      healthMultiplier: 0.07,
+      healthMultiplier: 1.07,
       regeneration: 16,
     },
     icon: Shield,

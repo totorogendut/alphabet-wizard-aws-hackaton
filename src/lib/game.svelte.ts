@@ -22,7 +22,6 @@ export class GameState {
   resources = new ResourcesData();
   isPaused = $state<boolean>(false);
   enemies = $state<ReturnType<typeof createEnemyEntity>[]>([]);
-  items = $state<Item[]>([]);
   difficulty = $state<Difficulty>("medium");
   spawnPool = $state<ReturnType<typeof enemySpawnGenerator>[]>([]);
   spawnTime = $state(10);

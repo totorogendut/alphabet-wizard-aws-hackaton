@@ -1,13 +1,14 @@
 export function applyBonusStats(baseStats: BaseStats, bonusStats: BonusStats) {
-  for (const statsKey in baseStats) {
+  const stats = structuredClone(baseStats);
+  for (const statsKey in stats) {
     const key = statsKey as keyof BonusStats;
 
     if (key === "resistance") {
-      for (const resistanceType in baseStats.resistance) {
+      for (const resistanceType in stats.resistance) {
         const resType = resistanceType as keyof Resistance;
         if (bonusStats.resistance?.[resType]) {
-          baseStats.resistance[resType] =
-            (baseStats.resistance[resType] || 0) +
+          stats.resistance[resType] =
+            (stats.resistance[resType] || 0) +
             (bonusStats.resistance[resType] || 0);
         }
       }
@@ -15,15 +16,15 @@ export function applyBonusStats(baseStats: BaseStats, bonusStats: BonusStats) {
       // Multiply multipliers
       const baseKey = key.replace("Multiplier", "") as BaseStatsRawKey;
 
-      if (!baseStats[baseKey]) baseStats[baseKey] = 0;
-      baseStats[baseKey] *= bonusStats[key] || 1;
+      if (!stats[baseKey]) stats[baseKey] = 0;
+      stats[baseKey] *= bonusStats[key] || 1;
     } else {
       // Sum numeric values
-      baseStats[key as BaseStatsRawKey] += bonusStats[key] || 0;
+      stats[key as BaseStatsRawKey] += bonusStats[key] || 0;
     }
   }
 
-  return baseStats;
+  return stats;
 }
 
 export function mergeBonusStats(arr: BonusStats[]): BonusStats {

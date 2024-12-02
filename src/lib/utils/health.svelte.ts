@@ -5,6 +5,7 @@ export class Health {
   #max = $state(0);
   #current = $state(0);
   #percentage = $derived(this.#current / this.#max);
+  regeneration = $state(0);
   readonly isLowHealth = $derived(this.#percentage <= 0.5);
   readonly isHighHealth = $derived(this.#percentage >= 0.85);
   readonly isFullHealth = $derived(this.#percentage >= 1);
@@ -13,13 +14,14 @@ export class Health {
   constructor(gameState: GameState, stats: BaseStats) {
     this.#max = stats.health;
     this.#current = stats.health;
+    this.regeneration = stats.regeneration;
 
     $effect.root(() => {
       $effect(() => {
         if (!gameState.turn) return;
         untrack(() => {
           if (!this.isAlive) return;
-          this.current += stats.regeneration;
+          this.current += this.regeneration;
         });
       });
     });
@@ -38,7 +40,7 @@ export class Health {
     this.#current = Math.max(Math.min(val, this.#max), 0);
   }
   set max(val: number) {
-    const currentHealth = this.#max / this.#current;
+    const currentHealth = this.#current / this.#max;
     this.#max = val;
     this.#current = this.#max * currentHealth;
   }

@@ -18,9 +18,9 @@ function deriveProcsFromItems(key: keyof Item["procs"]): Proc[] {
   if (!game?.player?.items) return [];
   return (
     game.player.items
-      .filter((item) => key in item.procs)
+      .filter((item) => item.procs && key in item.procs)
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      .map((item) => item.procs[key]!)
+      .map((item) => item.procs![key]!)
   );
 }
 
