@@ -1,11 +1,15 @@
 <script lang="ts">
+  import { itemTooltip, resetItemTooltip } from "$lib/items/tooltips.svelte";
   import { getResourceIcon } from "$lib/resources/helper";
+  import { nanoid } from "nanoid";
 
   interface Props extends Item {
     buy?: () => void;
   }
 
-  const { icon, isCostSufficient, title, cost, buy }: Props = $props();
+  const id = nanoid();
+  const props: Props = $props();
+  const { icon, isCostSufficient, title, cost, buy } = props;
 
   const isShop = $derived(Boolean(buy));
 </script>
@@ -15,6 +19,12 @@
   flex-col p-2"
   onclick={buy}
   class:isCostSufficient
+  style="anchor-name: --anchor-{id};"
+  onmouseenter={() => {
+    itemTooltip.anchor = `--anchor-${id}`;
+    itemTooltip.item = props;
+  }}
+  onmouseleave={resetItemTooltip}
 >
   <img
     src={icon}

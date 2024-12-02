@@ -17,11 +17,11 @@ export const items: Item[] = [
   },
   {
     title: "Ring of Health",
-    description: "Health ring",
+    description: "Doctors recommendation trinket for wounded patients.",
     cost: [{ amount: 20, name: "gold" }],
     bonusStats: {
       healthMultiplier: 1.07,
-      regeneration: 16,
+      regeneration: 7,
     },
     icon: Shield,
   },

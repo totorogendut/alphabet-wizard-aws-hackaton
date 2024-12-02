@@ -2,17 +2,13 @@
   import { game } from "$lib/game.svelte";
 </script>
 
-<section
-  id="logs"
-  class="h-[300px] bg-black p-4 grow overflow-y-scroll
-  flex flex-col justify-end"
->
+<div id="logs">
   {#each game.logs as { text, type }}
     <div class="logs-item {type} font-bold text-white">
       {text}
     </div>
   {/each}
-</section>
+</div>
 
 <style lang="postcss">
   #logs :global {
