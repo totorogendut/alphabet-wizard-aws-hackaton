@@ -3,8 +3,15 @@ interface BaseStats {
   speed: number; // between 0.1 ~ 1
   damage: number; // between 10 ~ 50
   armor: number; // between 0 ~ 20
-  regenation: number; // between 0 ~ 10
+  regeneration: number; // between 0 ~ 10
   resistance: Resistance;
+}
+
+type BaseStatsRawKey = Exclude<keyof BaseStats, "resistance">;
+interface BonusStats extends Partial<BaseStats> {
+  resistance?: Partial<Resistance>;
+  healthMultiplier?: number;
+  damageMultiplier?: number;
 }
 
 type DamageType = "physical" | "poison" | "lightning" | "cold" | "fire";
@@ -24,14 +31,7 @@ interface ResourceState {
   icon: string;
 }
 
-interface BuffBase {
-  // buff base can only consist of one of the stats below
-  speed?: number;
-  armor?: number;
-  damage?: number;
-  resistance?: Partial<Resistance>;
-  health?: number;
-}
+interface BuffBase extends BonusStats {}
 
 interface Buff extends BuffBase {
   duration: number;

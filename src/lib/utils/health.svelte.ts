@@ -1,5 +1,5 @@
-import { game } from "$lib/game.svelte";
 import { untrack } from "svelte";
+import type { GameState } from "$lib/game.svelte";
 
 export class Health {
   #max = $state(0);
@@ -10,16 +10,16 @@ export class Health {
   readonly isFullHealth = $derived(this.#percentage >= 1);
   readonly isAlive = $derived(this.#current > 0);
 
-  constructor(stats: BaseStats) {
+  constructor(gameState: GameState, stats: BaseStats) {
     this.#max = stats.health;
     this.#current = stats.health;
 
     $effect.root(() => {
       $effect(() => {
-        if (!game.turn) return;
+        if (!gameState.turn) return;
         untrack(() => {
           if (!this.isAlive) return;
-          this.current += stats.regenation;
+          this.current += stats.regeneration;
         });
       });
     });

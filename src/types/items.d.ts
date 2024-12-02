@@ -2,7 +2,7 @@ interface Item {
   title: string;
   cost: Resource[];
   isCostSufficient?: boolean;
-  buffs: BuffBase[]; // between 1 ~ 3 random buffs
+  bonusStats: BonusStats; // between 1 ~ 3 random buffs
   procs?: {
     // between 0 ~ 2 random procs
     onKill?: Proc;

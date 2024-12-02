@@ -1,7 +1,7 @@
 export const animalEnemies: Record<string, EnemyStats> = {
   wolf: {
     stringComplexity: 5,
-    regenation: 0,
+    regeneration: 0,
     health: 150,
     speed: 0.8,
     damage: 30,
@@ -21,7 +21,7 @@ export const animalEnemies: Record<string, EnemyStats> = {
   },
   bear: {
     stringComplexity: 8,
-    regenation: 10,
+    regeneration: 10,
     health: 200,
     speed: 0.5,
     damage: 40,
@@ -41,7 +41,7 @@ export const animalEnemies: Record<string, EnemyStats> = {
   },
   snake: {
     stringComplexity: 3,
-    regenation: 0,
+    regeneration: 0,
     health: 100,
     speed: 0.9,
     damage: 15,

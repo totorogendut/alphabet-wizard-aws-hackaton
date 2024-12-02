@@ -5,30 +5,36 @@ export const items: Item[] = [
     title: "Shield",
     description: "A poor man's shield.",
     cost: [{ amount: 10, name: "gold" }],
-    buffs: [
-      {
-        armor: 10,
-        health: 40,
-        resistance: {
-          cold: 14,
-          debuff: 6,
-        },
+    bonusStats: {
+      armor: 10,
+      health: 30,
+      resistance: {
+        cold: 14,
+        debuff: 6,
       },
-    ],
+    },
+    icon: Shield,
+  },
+  {
+    title: "Ring of Health",
+    description: "Health ring",
+    cost: [{ amount: 20, name: "gold" }],
+    bonusStats: {
+      healthMultiplier: 0.07,
+      regeneration: 16,
+    },
     icon: Shield,
   },
   {
     title: "Magick Ring",
     description: "Basic ring popular with mage apprentices.",
     cost: [{ amount: 6, name: "amber" }],
-    buffs: [
-      {
-        damage: 30,
-        resistance: {
-          debuff: 30,
-        },
+    bonusStats: {
+      damage: 30,
+      resistance: {
+        debuff: 30,
       },
-    ],
+    },
     icon: Shield,
   },
 ];

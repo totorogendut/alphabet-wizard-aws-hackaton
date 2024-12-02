@@ -13,22 +13,22 @@ import {
 import { castSpells } from "./utils/spells";
 import { ResourcesData, setupResources } from "./resources/main.svelte";
 
-class GameState {
+export class GameState {
   turn = $state(0);
   arena = $state() as ArenaState;
-  player = new Player();
+  player = new Player(this);
   keyboard = new KeyboardSetup();
   globalEnemyStats = new GlobalEnemyStats();
   resources = new ResourcesData();
   isPaused = $state<boolean>(false);
   enemies = $state<ReturnType<typeof createEnemyEntity>[]>([]);
   items = $state<Item[]>([]);
-  isDefeated = $derived<boolean>(this.player.health.current <= 0);
   difficulty = $state<Difficulty>("medium");
   spawnPool = $state<ReturnType<typeof enemySpawnGenerator>[]>([]);
   spawnTime = $state(10);
   spawnCooldown = $state(this.spawnTime);
   logs = $state<MessageLogs[]>([]);
+  isDefeated = $derived<boolean>(this.player.health.current <= 0);
 
   constructor(difficulty: Difficulty) {
     this.arena = newGateState[difficulty];
