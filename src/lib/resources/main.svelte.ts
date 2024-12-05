@@ -8,32 +8,32 @@ import stone from "$lib/assets/icons/resources/stone.png";
 export class ResourcesData {
   gold = $state<Resource>({
     name: "gold",
-    amount: 150,
+    amount: 1000,
     icon: gold,
   });
   food = $state<Resource>({
     name: "food",
-    amount: 100,
+    amount: 1000,
     icon: food,
   });
   lumber = $state<Resource>({
     name: "lumber",
-    amount: 0,
+    amount: 1000,
     icon: lumber,
   });
   quartz = $state<Resource>({
     name: "quartz",
-    amount: 0,
+    amount: 1000,
     icon: quartz,
   });
   amber = $state<Resource>({
     name: "amber",
-    amount: 0,
+    amount: 1000,
     icon: amber,
   });
   stone = $state<Resource>({
     name: "stone",
-    amount: 0,
+    amount: 1000,
     icon: stone,
   });
 }

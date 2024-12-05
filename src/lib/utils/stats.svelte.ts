@@ -1,7 +1,8 @@
 export function applyBonusStats(baseStats: BaseStats, bonusStats: BonusStats) {
   const stats = structuredClone(baseStats);
-  for (const statsKey in stats) {
+  for (const statsKey in bonusStats) {
     const key = statsKey as keyof BonusStats;
+    console.log(key);
 
     if (key === "resistance") {
       for (const resistanceType in stats.resistance) {
@@ -15,6 +16,7 @@ export function applyBonusStats(baseStats: BaseStats, bonusStats: BonusStats) {
     } else if (key.endsWith("Multiplier")) {
       // Multiply multipliers
       const baseKey = key.replace("Multiplier", "") as BaseStatsRawKey;
+      console.log(baseKey);
 
       if (!stats[baseKey]) stats[baseKey] = 0;
       stats[baseKey] *= bonusStats[key] || 1;

@@ -11,7 +11,7 @@ import {
   type enemySpawnGenerator,
 } from "./enemies/main.svelte";
 import { castSpells } from "./utils/spells";
-import { ResourcesData, setupResources } from "./resources/main.svelte";
+import { ResourcesData } from "./resources/main.svelte";
 
 export class GameState {
   turn = $state(0);

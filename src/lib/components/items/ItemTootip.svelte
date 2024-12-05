@@ -9,7 +9,12 @@
     style="top: anchor({itemTooltip.anchor} top); right: calc(anchor(--sidebar left) + 1em)"
   >
     <div class="flex gap-4">
-      <img src={itemTooltip.item.icon} alt={itemTooltip.item.title} />
+      <img
+        width={32}
+        height={32}
+        src={itemTooltip.item.icon}
+        alt={itemTooltip.item.title}
+      />
       <strong>
         {itemTooltip.item.title}
       </strong>
