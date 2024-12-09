@@ -1,5 +1,5 @@
-import { newGateState, newPlayerStats } from "./utils/difficulty";
-import { GlobalEnemyStats, type EnemyEntity } from "./enemies/_store.svelte";
+import { newGateState } from "./utils/difficulty";
+import type { EnemyEntity } from "./enemies/_store.svelte";
 import { KeyboardSetup } from "./keyboard/main.svelte";
 import { Player } from "./player/main.svelte";
 import {
@@ -9,6 +9,7 @@ import {
 } from "./enemies/main.svelte";
 import { castSpells } from "./utils/spells";
 import { ResourcesData } from "./resources/main.svelte";
+import { untrack } from "svelte";
 
 export class GameState {
   turn = $state(0);
@@ -30,10 +31,7 @@ export class GameState {
   isDefeated = $derived<boolean>(this.player.health.current <= 0);
   #effectCleanup = $effect.root(() => {
     $effect(() => {
-      if (this.turn % 10) {
-        this.globalEnemyStats.healthMultiplier += 0.5;
-        this.globalEnemyStats.damageMultiplier += 0.5;
-      }
+      this.addMonsterStats();
     });
   });
 
@@ -44,6 +42,14 @@ export class GameState {
 
   free() {
     this.#effectCleanup();
+  }
+
+  addMonsterStats() {
+    if (this.turn % 500 === 0)
+      untrack(() => {
+        this.globalEnemyStats.healthMultiplier += 0.5;
+        this.globalEnemyStats.damageMultiplier += 0.5;
+      });
   }
 }
 

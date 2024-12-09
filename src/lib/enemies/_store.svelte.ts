@@ -1,7 +1,6 @@
 import { game } from "$lib/game.svelte";
 import { Buffs } from "$lib/ststs/buffs..svelte";
 import { Health } from "$lib/utils/health.svelte";
-import { mergeArray } from "$lib/utils/misc";
 import { setupPosition, type Position } from "$lib/utils/position.svelte";
 import { applyBonusStats, mergeBonusStats } from "$lib/utils/stats.svelte";
 import { nanoid } from "nanoid";
@@ -53,21 +52,4 @@ export class EnemyEntity {
     this.buff.free();
     this.#effectCleanup();
   }
-}
-
-export class GlobalEnemyStats {
-  bonusHealth = $state(0);
-  bonusSpeed = $state(0);
-  bonusArmor = $state(0);
-  bonusResistance = $state<Resistance>({
-    fire: 0,
-    lightning: 0,
-    cold: 0,
-    poison: 0,
-    debuff: 0,
-    stun: 0,
-    physical: 0,
-  });
-  bonusSpawn = $state(0);
-  bonusDamage = $state(0);
 }
