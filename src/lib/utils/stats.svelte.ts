@@ -53,3 +53,7 @@ export function mergeBonusStats(arr: BonusStats[]): BonusStats {
     return stats;
   }, {});
 }
+
+export function calculateDebuffs(debuff: Debuff[]): Debuff[] {
+  return debuff;
+}

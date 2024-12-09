@@ -16,21 +16,26 @@ export class Player {
     mergeBonusStats(this.items.map((item) => item.bonusStats))
   );
   stats = $derived<BaseStats>(applyBonusStats(newPlayerStats, this.bonusStats));
-
-  constructor(gameState: GameState) {
-    this.health = new Health(gameState, this.stats);
-
-    $effect.root(() => {
-      $effect(() => {
-        this.stats.health;
-        untrack(() => {
-          this.health.max = this.stats.health;
-        });
-      });
-
-      $effect(() => {
-        this.health.regeneration = this.stats.regeneration;
+  #effectCleanup = $effect.root(() => {
+    $effect(() => {
+      this.stats.health;
+      untrack(() => {
+        this.health.max = this.stats.health;
       });
     });
+
+    $effect(() => {
+      this.health.regeneration = this.stats.regeneration;
+    });
+  });
+
+  constructor() {
+    this.health = new Health(this.stats);
+  }
+
+  free() {
+    this.health.free();
+    this.level.free();
+    this.#effectCleanup();
   }
 }

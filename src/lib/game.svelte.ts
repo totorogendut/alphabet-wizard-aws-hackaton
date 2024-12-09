@@ -1,8 +1,5 @@
 import { newGateState, newPlayerStats } from "./utils/difficulty";
-import {
-  GlobalEnemyStats,
-  type createEnemyEntity,
-} from "./enemies/_store.svelte";
+import { GlobalEnemyStats, type EnemyEntity } from "./enemies/_store.svelte";
 import { KeyboardSetup } from "./keyboard/main.svelte";
 import { Player } from "./player/main.svelte";
 import {
@@ -16,12 +13,12 @@ import { ResourcesData } from "./resources/main.svelte";
 export class GameState {
   turn = $state(0);
   arena = $state() as ArenaState;
-  player = new Player(this);
+  player = new Player();
   keyboard = new KeyboardSetup();
   globalEnemyStats = new GlobalEnemyStats();
   resources = new ResourcesData();
   isPaused = $state<boolean>(false);
-  enemies = $state<ReturnType<typeof createEnemyEntity>[]>([]);
+  enemies = $state<EnemyEntity[]>([]);
   difficulty = $state<Difficulty>("medium");
   spawnPool = $state<ReturnType<typeof enemySpawnGenerator>[]>([]);
   spawnTime = $state(10);

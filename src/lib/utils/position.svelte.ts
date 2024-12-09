@@ -1,3 +1,5 @@
+export type Position = ReturnType<typeof setupPosition>;
+
 export function setupPosition(data: { x: number; y: number }) {
   let x = $state(data.x);
   let y = $state(data.y);

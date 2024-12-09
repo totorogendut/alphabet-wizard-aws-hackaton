@@ -4,15 +4,18 @@ export class LevelingBase {
   current = $state<number>(1);
   expForNextLevel = $state(100);
   points = $state(0);
+  #effectCleanup = $effect.root(() => {
+    $effect(() => {
+      if (this.current > 1) this.levelUp();
+    });
+  });
 
   constructor(opts?: { maxLevel: number }) {
     if (opts?.maxLevel) this.#MAX_LEVEL = opts.maxLevel;
+  }
 
-    $effect.root(() => {
-      $effect(() => {
-        if (this.current > 1) this.levelUp();
-      });
-    });
+  free() {
+    this.#effectCleanup();
   }
 
   levelUp() {

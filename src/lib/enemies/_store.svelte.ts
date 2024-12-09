@@ -1,107 +1,65 @@
 import { game } from "$lib/game.svelte";
 import { Health } from "$lib/utils/health.svelte";
-import { setupPosition } from "$lib/utils/position.svelte";
+import { mergeArray } from "$lib/utils/misc";
+import { setupPosition, type Position } from "$lib/utils/position.svelte";
+import {
+  applyBonusStats,
+  calculateDebuffs,
+  mergeBonusStats,
+} from "$lib/utils/stats.svelte";
 import { nanoid } from "nanoid";
+import { untrack } from "svelte";
+import { createSubscriber } from "svelte/reactivity";
 
-export type EnemyEntity = ReturnType<typeof createEnemyEntity>;
-
-export function createEnemyEntity(data: EnemyStats) {
-  const id = nanoid();
-  const pos = setupPosition({
-    x: Math.max(Math.random() * 90, 10),
-    y: 0,
+export class EnemyEntity {
+  id: string;
+  health: Health;
+  buffs: Buff[] = [];
+  debuffs: Debuff[] = [];
+  pos: Position = $state({ x: 0, y: 0 });
+  baseStats = $state() as EnemyStats;
+  bonusStats = $derived<BonusStats>(
+    mergeBonusStats(mergeArray(this.buffs, calculateDebuffs(this.debuffs)))
+  );
+  stats = $derived<BaseStats>(
+    applyBonusStats($state.snapshot(this.baseStats), this.bonusStats)
+  );
+  isArrived = $derived(this.pos.y >= 100);
+  sprite = $derived(this.baseStats.sprite);
+  size = $derived(this.baseStats.size);
+  #effectCleanup = $effect.root(() => {
+    $effect(() => {
+      if (!game.turn) return;
+      untrack(() => {
+        if (this.isArrived) this.attack();
+      });
+    });
   });
-  const buffs = $state<Buff[]>([]);
-  const debuffs = $state<Debuff[]>([]);
-  const health = new Health(game, data);
-  const armor = $derived(applyBonus("armor"));
-  const speed = $derived(applyBonus("speed"));
-  const damage = $derived(applyBonus("damage"));
-  const resistance = $derived<Resistance>({
-    fire: applyBonus("fire", "resistance"),
-    cold: applyBonus("cold", "resistance"),
-    lightning: applyBonus("lightning", "resistance"),
-    poison: applyBonus("poison", "resistance"),
-    debuff: applyBonus("debuff", "resistance"),
-    stun: applyBonus("stun", "resistance"),
-    physical: applyBonus("physical", "resistance"),
-  });
-  const hasArrived = $derived(pos.y >= 100);
 
-  type BuffKeys = Exclude<keyof BuffBase, "duration">;
-  function applyBonus(
-    key: Exclude<BuffKeys, "resistance"> | keyof Resistance,
-    parentKey?: "resistance"
-  ) {
-    let final = (
-      parentKey
-        ? data[parentKey][key as keyof Resistance]
-        : data[key as Exclude<BuffKeys, "resistance">]
-    ) as number;
-    let bonus = 0;
-
-    for (const buff of buffs.filter((b) => key in b)) {
-      bonus += parentKey
-        ? buff[parentKey][key as keyof Resistance]
-        : buff[key as Exclude<BuffKeys, "resistance">];
-    }
-
-    for (const debuff of debuffs.filter((b) => key in b)) {
-      bonus -= parentKey
-        ? debuff[parentKey][key as keyof Resistance]
-        : debuff[key as Exclude<BuffKeys, "resistance">];
-    }
-
-    const multiplier = 1 + bonus / 100;
-    final = final * Math.max(0.05, multiplier);
-
-    return final;
+  constructor(stats: EnemyStats) {
+    this.id = nanoid();
+    this.baseStats = stats;
+    this.health = new Health(stats);
+    this.pos = setupPosition({
+      x: Math.max(Math.random() * 90, 10),
+      y: 0,
+    });
   }
 
-  return {
-    attack() {
-      const index = game.enemies.findIndex((enemy) => enemy.id === id);
-      game.enemies.splice(index, 1);
-      game.player.health.current -= damage;
-    },
-    get health() {
-      return health;
-    },
-    get id() {
-      return id;
-    },
-    get pos() {
-      return pos;
-    },
-    get sprite() {
-      return data.sprite;
-    },
-    get size() {
-      return data.size;
-    },
-    get debuffs() {
-      return debuffs;
-    },
-    get buffs() {
-      return buffs;
-    },
-    get resistance() {
-      return resistance;
-    },
-    get damage() {
-      return damage;
-    },
-    get speed() {
-      return speed;
-    },
-    get hasArrived() {
-      return hasArrived;
-    },
-    get armor() {
-      return armor;
-    },
-  };
+  attack() {
+    game.player.health.current -= this.stats.damage;
+    this.remove();
+  }
+
+  remove() {
+    const index = game.enemies.findIndex((enemy) => enemy.id === this.id);
+    game.enemies.splice(index, 1);
+    this.health.free();
+    this.#effectCleanup();
+  }
 }
+
+export const enemeyGlobalBonusStats = $state<BonusStats[]>([]);
 
 export class GlobalEnemyStats {
   bonusHealth = $state(0);

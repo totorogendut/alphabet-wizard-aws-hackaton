@@ -1,5 +1,5 @@
 import { untrack } from "svelte";
-import type { GameState } from "$lib/game.svelte";
+import { game, type GameState } from "$lib/game.svelte";
 
 export class Health {
   #max = $state(0);
@@ -10,21 +10,20 @@ export class Health {
   readonly isHighHealth = $derived(this.#percentage >= 0.85);
   readonly isFullHealth = $derived(this.#percentage >= 1);
   readonly isAlive = $derived(this.#current > 0);
+  #effectCleanup = $effect.root(() => {
+    $effect(() => {
+      if (!game.turn) return;
+      untrack(() => {
+        if (!this.isAlive) return;
+        this.current += this.regeneration;
+      });
+    });
+  });
 
-  constructor(gameState: GameState, stats: BaseStats) {
+  constructor(stats: BaseStats) {
     this.#max = stats.health;
     this.#current = stats.health;
     this.regeneration = stats.regeneration;
-
-    $effect.root(() => {
-      $effect(() => {
-        if (!gameState.turn) return;
-        untrack(() => {
-          if (!this.isAlive) return;
-          this.current += this.regeneration;
-        });
-      });
-    });
   }
 
   get max() {
@@ -43,5 +42,9 @@ export class Health {
     const currentHealth = this.#current / this.#max;
     this.#max = val;
     this.#current = this.#max * currentHealth;
+  }
+
+  free() {
+    this.#effectCleanup();
   }
 }

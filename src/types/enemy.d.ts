@@ -1,6 +1,6 @@
 interface EnemyStats extends BaseStats {
   stringComplexity: number; // between 1 ~ 10
-  sprite: string; // starts with /sprites/<type>/<key>.png
+  sprite: string | Picture; // starts with /sprites/<type>/<key>.png
   size: number; // between 2 ~ 6
   spawn: number; // between 4 ~ 10
   /**
