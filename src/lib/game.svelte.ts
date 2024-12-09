@@ -15,7 +15,10 @@ export class GameState {
   arena = $state() as ArenaState;
   player = new Player();
   keyboard = new KeyboardSetup();
-  globalEnemyStats = new GlobalEnemyStats();
+  globalEnemyStats = $state({
+    healthMultiplier: 1,
+    damageMultiplier: 1,
+  });
   resources = new ResourcesData();
   isPaused = $state<boolean>(false);
   enemies = $state<EnemyEntity[]>([]);
@@ -25,10 +28,22 @@ export class GameState {
   spawnCooldown = $state(this.spawnTime);
   logs = $state<MessageLogs[]>([]);
   isDefeated = $derived<boolean>(this.player.health.current <= 0);
+  #effectCleanup = $effect.root(() => {
+    $effect(() => {
+      if (this.turn % 10) {
+        this.globalEnemyStats.healthMultiplier += 0.5;
+        this.globalEnemyStats.damageMultiplier += 0.5;
+      }
+    });
+  });
 
   constructor(difficulty: Difficulty) {
     this.arena = newGateState[difficulty];
     this.difficulty = difficulty;
+  }
+
+  free() {
+    this.#effectCleanup();
   }
 }
 

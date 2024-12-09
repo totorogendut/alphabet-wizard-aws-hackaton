@@ -1,25 +1,20 @@
 import { game } from "$lib/game.svelte";
+import { Buffs } from "$lib/ststs/buffs..svelte";
 import { Health } from "$lib/utils/health.svelte";
 import { mergeArray } from "$lib/utils/misc";
 import { setupPosition, type Position } from "$lib/utils/position.svelte";
-import {
-  applyBonusStats,
-  calculateDebuffs,
-  mergeBonusStats,
-} from "$lib/utils/stats.svelte";
+import { applyBonusStats, mergeBonusStats } from "$lib/utils/stats.svelte";
 import { nanoid } from "nanoid";
 import { untrack } from "svelte";
-import { createSubscriber } from "svelte/reactivity";
 
 export class EnemyEntity {
   id: string;
   health: Health;
-  buffs: Buff[] = [];
-  debuffs: Debuff[] = [];
+  buff = new Buffs();
   pos: Position = $state({ x: 0, y: 0 });
   baseStats = $state() as EnemyStats;
   bonusStats = $derived<BonusStats>(
-    mergeBonusStats(mergeArray(this.buffs, calculateDebuffs(this.debuffs)))
+    mergeBonusStats(game.globalEnemyStats, this.buff.all)
   );
   stats = $derived<BaseStats>(
     applyBonusStats($state.snapshot(this.baseStats), this.bonusStats)
@@ -55,11 +50,10 @@ export class EnemyEntity {
     const index = game.enemies.findIndex((enemy) => enemy.id === this.id);
     game.enemies.splice(index, 1);
     this.health.free();
+    this.buff.free();
     this.#effectCleanup();
   }
 }
-
-export const enemeyGlobalBonusStats = $state<BonusStats[]>([]);
 
 export class GlobalEnemyStats {
   bonusHealth = $state(0);

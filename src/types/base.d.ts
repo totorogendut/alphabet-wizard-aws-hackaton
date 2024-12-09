@@ -31,13 +31,10 @@ interface ResourceState {
   icon: string;
 }
 
-interface BuffBase extends BonusStats {}
-
-interface Buff extends BuffBase {
+interface Buff extends BonusStats {
+  id: string;
   duration: number;
-}
-interface Debuff extends BuffBase {
-  duration: number;
+  isNegative: boolean;
   isDispellable: boolean;
 }
 

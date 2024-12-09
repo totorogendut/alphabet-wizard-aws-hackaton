@@ -6,14 +6,19 @@ import { LevelingBase, PlayerLeveling } from "$lib/utils/leveling.svelte";
 import { applyBonusStats, mergeBonusStats } from "$lib/utils/stats.svelte";
 import { untrack } from "svelte";
 import { setupProcs } from "./procs.svelte";
+import { Buffs } from "$lib/ststs/buffs..svelte";
 
 export class Player {
   items = $state<Item[]>([]);
   procs = $state(setupProcs());
   level = new PlayerLeveling();
+  buff = new Buffs();
   health: Health;
   bonusStats = $derived<BonusStats>(
-    mergeBonusStats(this.items.map((item) => item.bonusStats))
+    mergeBonusStats(
+      this.items.map((item) => item.bonusStats),
+      this.buff.all
+    )
   );
   stats = $derived<BaseStats>(applyBonusStats(newPlayerStats, this.bonusStats));
   #effectCleanup = $effect.root(() => {

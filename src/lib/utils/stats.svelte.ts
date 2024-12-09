@@ -29,31 +29,40 @@ export function applyBonusStats(baseStats: BaseStats, bonusStats: BonusStats) {
   return stats;
 }
 
-export function mergeBonusStats(arr: BonusStats[]): BonusStats {
-  return arr.reduce<BonusStats>((stats, item) => {
-    for (const buffKey in item) {
-      const key = buffKey as keyof typeof item;
-      if (key === "resistance" && item.resistance) {
+export function mergeBonusStats(
+  ...arr: Array<BonusStats[] | BonusStats>
+): BonusStats {
+  const stats: BonusStats = {};
+  for (const bonuses of arr) {
+    if (Array.isArray(bonuses)) {
+      for (const bonus of bonuses) {
+        addStats(bonus);
+      }
+    } else {
+      addStats(bonuses);
+    }
+  }
+
+  return stats;
+
+  function addStats(bonus: BonusStats) {
+    for (const buffKey in bonus) {
+      const key = buffKey as keyof typeof bonus;
+      if (key === "resistance" && bonus.resistance) {
         // Merge resistance objects recursively
         stats.resistance = stats.resistance || {};
-        for (const resistanceType in item.resistance) {
-          const resType = resistanceType as keyof typeof item.resistance;
+        for (const resistanceType in bonus.resistance) {
+          const resType = resistanceType as keyof typeof bonus.resistance;
           stats.resistance[resType] =
-            (stats.resistance[resType] || 0) + (item.resistance[resType] || 0);
+            (stats.resistance[resType] || 0) + (bonus.resistance[resType] || 0);
         }
       } else if (key === "healthMultiplier" || key === "damageMultiplier") {
         // Multiply multipliers
-        stats[key] = (stats[key] || 1) * (item[key] || 1);
+        stats[key] = (stats[key] || 1) * (bonus[key] || 1);
       } else if (key !== "resistance") {
         // Sum numeric values
-        stats[key] = (stats[key] || 0) + (item[key] || 0);
+        stats[key] = (stats[key] || 0) + (bonus[key] || 0);
       }
     }
-
-    return stats;
-  }, {});
-}
-
-export function calculateDebuffs(debuff: Debuff[]): Debuff[] {
-  return debuff;
+  }
 }
