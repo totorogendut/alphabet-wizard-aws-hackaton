@@ -41,6 +41,8 @@ export class GameState {
   }
 
   free() {
+    this.player.free();
+    for (const enemy of this.enemies) enemy.remove();
     this.#effectCleanup();
   }
 
@@ -65,5 +67,6 @@ export function gameTick() {
 export let game = new GameState("medium");
 
 export function restartGame() {
+  game.free();
   game = new GameState(game.difficulty);
 }

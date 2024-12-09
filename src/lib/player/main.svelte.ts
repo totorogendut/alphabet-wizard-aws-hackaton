@@ -41,6 +41,7 @@ export class Player {
   free() {
     this.health.free();
     this.level.free();
+    this.buff.free();
     this.#effectCleanup();
   }
 }
