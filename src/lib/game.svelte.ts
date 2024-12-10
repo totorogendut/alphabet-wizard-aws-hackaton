@@ -47,10 +47,18 @@ export class GameState {
   }
 
   addMonsterStats() {
-    if (this.turn % 500 === 0)
+    const bonus = 0.05;
+    const turnInterval = 500;
+
+    if (this.turn % turnInterval === 0 && this.turn)
       untrack(() => {
-        this.globalEnemyStats.healthMultiplier += 0.5;
-        this.globalEnemyStats.damageMultiplier += 0.5;
+        this.logs.push({
+          text: `Enemy stats increased by ${bonus * 100}%`,
+          type: "error",
+        });
+
+        this.globalEnemyStats.healthMultiplier += bonus;
+        this.globalEnemyStats.damageMultiplier += bonus;
       });
   }
 }

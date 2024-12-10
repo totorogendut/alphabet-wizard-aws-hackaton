@@ -7,3 +7,7 @@ export function getRandomChild<T>(obj: Record<string, T>): T {
 export function mergeArray<T>(...arr: T[][]): T[] {
   return ([] as T[]).concat(...arr);
 }
+
+export async function delay(seconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+}
