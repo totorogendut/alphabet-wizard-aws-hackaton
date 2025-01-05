@@ -20,8 +20,19 @@ export class KeyboardSetup {
       : ""
   );
 
+  readonly commandHelper = $derived.by(() => {
+    const length = this.args.length;
+
+    if (length <= 1)
+      return availableCommands.filter(
+        (text) => this.text === "" || text.includes(this.args[0])
+      );
+
+    return [];
+  });
+
   readonly isCommandInvalid: boolean = $derived(
-    !this.command && !!this.text.length
+    !this.commandHelper?.length && !!this.text.length
   );
   readonly isEmpty: boolean = $derived(!this.text.length);
 
