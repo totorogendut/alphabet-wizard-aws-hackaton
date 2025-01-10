@@ -30,7 +30,7 @@
     >
   </div>
   <strong
-    class="w-max text-center group-has-[img:hover]/enemy:bg-white px-2 leading-1
+    class="w-max text-center group-has-[img:hover]/enemy:bg-white px-2
       group-has-[img:hover]/enemy:outline-1 outline-black">{data.text}</strong
   >
 </div>
