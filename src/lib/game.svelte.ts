@@ -69,7 +69,7 @@ export function gameTick() {
   castSpells();
   moveEnemies();
 
-  game.player.procs.onGameTick();
+  // game.player.procs.onGameTick();
   game.turn++;
 }
 

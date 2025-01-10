@@ -11,8 +11,18 @@
 </div>
 
 <style lang="postcss">
-  #logs :global {
+  #logs {
     .success {
+      color: var(--color-green-200);
+    }
+    .battle {
+      color: var(--color-orange-200);
+    }
+    .info {
+      color: var(--color-yellow-200);
+    }
+    .error {
+      color: var(--color-red-200);
     }
   }
 </style>
