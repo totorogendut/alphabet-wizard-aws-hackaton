@@ -28,7 +28,7 @@ export const items: Item[] = [
     description: "Doctors recommendation beverage for wounded patients.",
     cost: [{ amount: 100, name: "gold" }],
     bonusStats: {
-      regeneration: 7,
+      regeneration: 4,
       resistance: {
         cold: 15,
         poison: 20,

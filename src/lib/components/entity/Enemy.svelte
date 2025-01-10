@@ -10,7 +10,7 @@
 </script>
 
 <div
-  class="absolute flex flex-col items-center"
+  class="group/enemy absolute flex flex-col items-center !hover:z-50"
   style="
     left:{data.pos.x}cqw;top:{data.pos.y}cqh; z-index:{data.size};"
   data-size={data.size}
@@ -28,5 +28,7 @@
       >{Math.floor(data.health.current)}</span
     >
   </div>
-  <strong class="w-max text-center">{data.text}</strong>
+  <strong class="w-max text-center group-hover/enemy:bg-white px-2 leading-1"
+    >{data.text}</strong
+  >
 </div>
