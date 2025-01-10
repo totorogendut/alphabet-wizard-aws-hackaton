@@ -1,3 +1,13 @@
+import armor from "$lib/assets/items/armor.svg";
+import bag from "$lib/assets/items/bag.svg";
+import book from "$lib/assets/items/book.svg";
+import bow from "$lib/assets/items/bow.svg";
+import crystal from "$lib/assets/items/crystal.svg";
+import map from "$lib/assets/items/map.svg";
+import potion from "$lib/assets/items/potion.svg";
+import scroll from "$lib/assets/items/scroll.svg";
+import sword from "$lib/assets/items/sword.svg";
+
 export const items: Item[] = [
   {
     title: "Guard's Armor",
@@ -11,7 +21,7 @@ export const items: Item[] = [
         debuff: 6,
       },
     },
-    icon: (await import("$lib/assets/items/armor.svg")).default,
+    icon: armor,
   },
   {
     title: "Syrup of Health",
@@ -24,7 +34,7 @@ export const items: Item[] = [
         poison: 20,
       },
     },
-    icon: (await import("$lib/assets/items/potion.svg")).default,
+    icon: potion,
   },
   {
     title: "Adventurer's Sword",
@@ -33,7 +43,7 @@ export const items: Item[] = [
     bonusStats: {
       damage: 30,
     },
-    icon: (await import("$lib/assets/items/sword.svg")).default,
+    icon: sword,
   },
   {
     title: "Stable Magic Crystal",
@@ -43,7 +53,7 @@ export const items: Item[] = [
       damageMultiplier: 1.16,
       healthMultiplier: 1.16,
     },
-    icon: (await import("$lib/assets/items/crystal.svg")).default,
+    icon: crystal,
   },
   {
     title: "Bow of Swift Wind",
@@ -56,7 +66,7 @@ export const items: Item[] = [
         lightning: 20,
       },
     },
-    icon: (await import("$lib/assets/items/bow.svg")).default,
+    icon: bow,
   },
   {
     title: "Map",
@@ -68,7 +78,7 @@ export const items: Item[] = [
         debuff: 50,
       },
     },
-    icon: (await import("$lib/assets/items/map.svg")).default,
+    icon: map,
   },
   {
     title: "Scroll of Earth Magic",
@@ -82,7 +92,7 @@ export const items: Item[] = [
         physical: 6,
       },
     },
-    icon: (await import("$lib/assets/items/scroll.svg")).default,
+    icon: scroll,
   },
   {
     title: "Book of True Insight",
@@ -95,7 +105,7 @@ export const items: Item[] = [
         debuff: 30,
       },
     },
-    icon: (await import("$lib/assets/items/book.svg")).default,
+    icon: book,
   },
   {
     title: "Survivor's Bag",
@@ -110,6 +120,6 @@ export const items: Item[] = [
         lightning: 50,
       },
     },
-    icon: (await import("$lib/assets/items/bag.svg")).default,
+    icon: bag,
   },
 ];
