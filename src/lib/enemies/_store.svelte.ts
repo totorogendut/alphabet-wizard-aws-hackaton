@@ -79,7 +79,9 @@ export class EnemyEntity {
 
     game.logs.push({
       type: "success",
-      text: `You gain from killing ${this.text}`,
+      text: `You gain ${Object.keys(loot)
+        .map((key) => `${loot[key]} ${key}`)
+        .join(", ")} from killing ${this.text}`,
     });
   }
 

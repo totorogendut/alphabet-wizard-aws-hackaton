@@ -6,7 +6,7 @@
   import Endgame from "$lib/components/arena/Endgame.svelte";
 </script>
 
-{#if game.isDefeated}
+{#if !game.isDefeated}
   <main class="play">
     <ArenaContainer />
     <SideBarContainer />
