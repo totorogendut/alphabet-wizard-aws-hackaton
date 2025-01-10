@@ -4,7 +4,9 @@ export function damage(dmg: number, type: DamageType = "physical") {
   let damageTaken = dmg;
 
   return {
-    taken: damageTaken,
+    get taken() {
+      return Math.floor(damageTaken);
+    },
     armor(armor: number) {
       const damageReduction = armor / (armor + dmg);
       damageTaken = dmg * (1 - damageReduction);

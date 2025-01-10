@@ -1,1 +1,8 @@
 @import 'tailwindcss';
+
+kbd {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background-color: #aaa9;
+  box-shadow: 2px 2px #6669;
+}

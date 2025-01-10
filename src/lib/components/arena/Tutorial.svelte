@@ -42,10 +42,4 @@
 </section>
 
 <style>
-  kbd {
-    padding: 2px 8px;
-    border-radius: 4px;
-    background-color: #6663;
-    box-shadow: 2px 2px #6666;
-  }
 </style>

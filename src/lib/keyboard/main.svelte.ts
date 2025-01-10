@@ -1,4 +1,5 @@
 import { game, gameTick } from "$lib/game.svelte";
+import { resourcesList } from "$lib/resources/main.svelte";
 import { damage } from "$lib/utils/damage";
 import { delay, isNumber } from "$lib/utils/misc";
 
@@ -23,7 +24,13 @@ export class KeyboardSetup {
 
   readonly commandHelper = $derived.by(() => {
     const length = this.args.length;
+    const isLastEmpty = this.text.slice(-1) === " ";
 
+    if (this.args[0] === "gather")
+      return this.args[1]
+        ? resourcesList.filter((text) => text.startsWith(this.args[1]))
+        : resourcesList;
+    if (this.args[0] === "attack") return [];
     if (length <= 1)
       return availableCommands.filter(
         (text) => this.text === "" || text.includes(this.args[0])
@@ -33,14 +40,23 @@ export class KeyboardSetup {
   });
 
   readonly isCommandInvalid: boolean = $derived(
-    !this.commandHelper?.length && !!this.text.length
+    !this.commandHelper?.length &&
+      !!this.text.length &&
+      this.args[0] !== "attack"
   );
+
+  readonly showInputWarning: boolean = $derived(
+    this.args[0] === "attack" || !this.commandHelper.length
+  );
+
   readonly isEmpty: boolean = $derived(!this.text.length);
 
   submit() {
-    if (this.command === "attack") this.#attack();
+    let correct = false;
+    if (this.command === "attack") correct = this.#attack();
     // if (this.command === "upgrade") this.#upgrade();
-    if (this.command === "gather") this.#gather();
+    if (this.command === "gather") correct = this.#gather();
+    if (!correct) this.#selfDamage();
 
     this.clear();
   }
@@ -71,7 +87,7 @@ export class KeyboardSetup {
         text: "Attack missed.",
         type: "error",
       });
-      return;
+      return false;
     }
     const stats = game.enemies[enemyIndex].stats;
     const finalDamage = damage(game.player.stats.damage).armor(
@@ -82,6 +98,8 @@ export class KeyboardSetup {
       text: `You deal ${finalDamage} to ${target}.`,
       type: "battle",
     });
+
+    return true;
   }
   #upgrade() {
     const target = this.args[1];
@@ -90,11 +108,24 @@ export class KeyboardSetup {
     const target = this.args[1] as keyof typeof game.resources;
     const amount = 25;
 
-    if (!isNumber(game.resources[target]?.amount)) return;
+    if (!isNumber(game.resources[target]?.amount)) return false;
     game.resources[target].amount += amount;
     game.logs.push({
       text: `${amount} ${target} gathered.`,
       type: "success",
+    });
+
+    return true;
+  }
+
+  #selfDamage() {
+    const { armor } = game.player.stats;
+    const finalDamage = damage(game.player.stats.damage).armor(armor).taken;
+    game.player.health.current -= finalDamage;
+
+    game.logs.push({
+      text: `You inflict ${finalDamage} to yourself due to inputing the wrong command.`,
+      type: "error",
     });
   }
 }
