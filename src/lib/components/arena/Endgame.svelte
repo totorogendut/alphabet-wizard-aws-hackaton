@@ -33,6 +33,14 @@
     <strong>TIPS:</strong>
     <p>{tips[Math.floor(Math.random() * tips.length)]}</p>
   </div>
+  <div class="mt-4">
+    <span class="font-semibold">Support:</span>
+    <a
+      class="font-bold inline-block bg-gray-200 hover:brightness-90
+        px-4 py-1 rounded-md ml-2"
+      href="https://github.com/sponsors/totorogendut">💖 Sponsor</a
+    >
+  </div>
 </section>
 
 <style>
