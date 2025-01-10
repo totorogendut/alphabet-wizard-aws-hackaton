@@ -10,13 +10,14 @@
 </script>
 
 <div
-  class="group/enemy absolute flex flex-col items-center !hover:z-50"
+  class="group/enemy absolute flex flex-col items-center has-[img:hover]:!z-50"
   style="
-    left:{data.pos.x}cqw;top:{data.pos.y}cqh; z-index:{data.size};"
+    left:{data.pos.x}cqw;top:{data.pos
+    .y}cqh; z-index:{data.size};width:{size}cqmin;"
   data-size={data.size}
 >
   <enhanced:img
-    class="block relative"
+    class="block relative border-[1px]"
     style="width:{size}cqmin;height:{size}cqmin;"
     src={data.sprite}
   >
@@ -28,7 +29,8 @@
       >{Math.floor(data.health.current)}</span
     >
   </div>
-  <strong class="w-max text-center group-hover/enemy:bg-white px-2 leading-1"
-    >{data.text}</strong
+  <strong
+    class="w-max text-center group-has-[img:hover]/enemy:bg-white px-2 leading-1
+      group-has-[img:hover]/enemy:outline-1 outline-black">{data.text}</strong
   >
 </div>
