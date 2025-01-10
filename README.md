@@ -10,4 +10,4 @@ Made for SvelteHack 2024 (for usage of Svelte and Runes).
 
 ## Credits (Assets)
 
-N/A
+[SVGRepo](https://www.svgrepo.com/)
