@@ -1,4 +1,4 @@
-# Alphabest WiZard
+# Alphabet WiZard
 
 Alphabet Wizard is a web-based game that rely entirely on DOM elements to render the game. It uses Svelte 5's Runes as its primary reactivity system to manage complex states and interactions.
 
