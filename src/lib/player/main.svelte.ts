@@ -1,8 +1,6 @@
-import { game, type GameState } from "$lib/game.svelte";
-import type { createItems } from "$lib/items/main.svelte";
 import { newPlayerStats } from "$lib/utils/difficulty";
 import { Health } from "$lib/utils/health.svelte";
-import { LevelingBase, PlayerLeveling } from "$lib/utils/leveling.svelte";
+import { PlayerLeveling } from "$lib/utils/leveling.svelte";
 import { applyBonusStats, mergeBonusStats } from "$lib/utils/stats.svelte";
 import { untrack } from "svelte";
 import { setupProcs } from "./procs.svelte";
@@ -10,7 +8,7 @@ import { Buffs } from "$lib/ststs/buffs..svelte";
 
 export class Player {
   items = $state<Item[]>([]);
-  procs = $state(setupProcs());
+  // procs = $state(setupProcs());
   level = new PlayerLeveling();
   buff = new Buffs();
   health: Health;
