@@ -1,6 +1,6 @@
 # Alphabet WiZard
 
-Alphabet Wizard is a web-based typing game that rely entirely on DOM elements to render the game. It uses Svelte 5's Runes as its primary reactivity system to manage complex states and interactions.
+Alphabet Wizard is a text-based typing, turn-based game that rely entirely on DOM elements to render the game. It uses Svelte 5's Runes as its primary reactivity system to manage complex states and interactions.
 
 [demo](https://alphabet-wizard.pages.dev)
 
