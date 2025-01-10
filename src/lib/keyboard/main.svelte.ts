@@ -2,6 +2,7 @@ import { game, gameTick } from "$lib/game.svelte";
 import { resourcesList } from "$lib/resources/main.svelte";
 import { damage } from "$lib/utils/damage";
 import { delay, isNumber } from "$lib/utils/misc";
+import { untrack } from "svelte";
 
 const availableCommands = ["attack", "gather"] as const;
 type AvailableCommands = (typeof availableCommands)[number];
@@ -50,6 +51,23 @@ export class KeyboardSetup {
   );
 
   readonly isEmpty: boolean = $derived(!this.text.length);
+
+  #textSnapshot = $state("");
+  #effectCleanup = $effect.root(() => {
+    $effect(() => {
+      const lengthDiff = this.text.length - this.#textSnapshot.length;
+      if (lengthDiff > 1)
+        untrack(() => {
+          this.clear();
+          game.logs.push({
+            text: "Forbidden input - clearing the command!",
+            type: "error",
+          });
+        });
+
+      this.#textSnapshot = this.text;
+    });
+  });
 
   submit() {
     let correct = false;
