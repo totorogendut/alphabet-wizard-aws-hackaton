@@ -14,12 +14,18 @@
       Type <kbd>attack</kbd> followed by the name of the enemy to attack them.
     </li>
     <li>
+      The game moves one turn every time you type into the command input. Every
+      turn, enemies will move toward the bottom and they will deal damage to you
+      once they reach the bottom of the arena (green section).
+    </li>
+    <li>
       Pressing <kbd>Backspace</kbd> or <kbd>Delete</kbd> will clear the command,
       effectively wasting the turn used typing the cleared command.
     </li>
     <li>
-      Kill as many as enemies you can before your health (the big number above
-      resources) goes down to zero!
+      Killing enemy gives you score, exp, and resources. Kill as many as enemies
+      you can before your health (the big number above resources) goes down to
+      zero!
     </li>
     <li>
       <strong>NOTE:</strong> This is not the final version of the game! Many features
