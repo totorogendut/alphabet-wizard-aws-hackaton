@@ -66,7 +66,13 @@ export class KeyboardSetup {
     const target = this.args.slice(1).join(" ").trim().toLowerCase();
     const enemyIndex = game.enemies.findIndex((e) => e.text === target);
 
-    if (enemyIndex === -1) return;
+    if (enemyIndex === -1) {
+      game.logs.push({
+        text: "Attack missed.",
+        type: "error",
+      });
+      return;
+    }
     const stats = game.enemies[enemyIndex].stats;
     const finalDamage = damage(game.player.stats.damage).armor(
       stats.armor

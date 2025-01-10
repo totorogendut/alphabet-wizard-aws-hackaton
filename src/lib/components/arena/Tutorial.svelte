@@ -27,6 +27,7 @@
       you can before your health (the big number above resources) goes down to
       zero!
     </li>
+    <li>The longer the game goes on, the stronger the enemies get!</li>
     <li>
       <strong>NOTE:</strong> This is not the final version of the game! Many features
       like spells and buffs mechanism simply don't land on the hackaton due to time

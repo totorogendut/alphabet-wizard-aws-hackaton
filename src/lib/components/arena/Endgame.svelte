@@ -29,7 +29,7 @@
       >
     </div>
   </div>
-  <div class="mt-6">
+  <div class="mt-6 leading-tight">
     <strong>TIPS:</strong>
     <p>{tips[Math.floor(Math.random() * tips.length)]}</p>
   </div>

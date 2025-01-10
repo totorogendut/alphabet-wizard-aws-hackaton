@@ -49,7 +49,7 @@ export class GameState {
 
   addMonsterStats() {
     const bonus = 0.05;
-    const turnInterval = 500;
+    const turnInterval = 50;
 
     if (this.turn % turnInterval === 0 && this.turn)
       untrack(() => {

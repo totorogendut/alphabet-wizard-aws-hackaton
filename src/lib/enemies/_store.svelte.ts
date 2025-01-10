@@ -44,7 +44,7 @@ export class EnemyEntity {
   constructor(stats: EnemyStats) {
     this.id = nanoid();
     this.baseStats = stats;
-    this.health = new Health(stats);
+    this.health = new Health(this.stats);
     this.pos = setupPosition({
       x: Math.max(Math.random() * 90, 10),
       y: 0,
