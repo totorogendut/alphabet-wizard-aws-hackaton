@@ -30,6 +30,13 @@ export class EnemyEntity {
         if (this.isArrived) this.attack();
       });
     });
+
+    $effect(() => {
+      if (this.health.isAlive) return;
+      untrack(() => {
+        this.onDeath();
+      });
+    });
   });
 
   constructor(stats: EnemyStats) {
@@ -43,12 +50,18 @@ export class EnemyEntity {
 
     const type = stats.type as keyof typeof faker;
     const subType = stats.subType as keyof typeof faker.animal;
-    this.text = faker.animal?.[subType]?.() || "lol";
+    this.text = faker.animal?.[subType]?.()?.toLowerCase?.() || "lol";
   }
 
   attack() {
     game.player.health.current -= this.stats.damage;
     this.remove();
+  }
+
+  onDeath() {
+    this.remove();
+    game.player.level.exp += 40;
+    game.score += 5;
   }
 
   remove() {

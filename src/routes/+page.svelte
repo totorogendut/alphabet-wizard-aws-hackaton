@@ -3,6 +3,7 @@
   import ArenaContainer from "$lib/ui/arena/ArenaContainer.svelte";
   import SideBarContainer from "$lib/components/sidebar/SideBarContainer.svelte";
   import BottomBarContainer from "$lib/components/bottombar/BottomBarContainer.svelte";
+  import Endgame from "$lib/components/arena/Endgame.svelte";
 </script>
 
 {#if !game.isDefeated}
@@ -12,11 +13,13 @@
     <BottomBarContainer />
   </main>
 {:else}
-  <h1>Dead</h1>
+  <main class="bg-amber-500">
+    <Endgame />
+  </main>
 {/if}
 
 <style lang="postcss">
-  main.play {
+  main {
     width: 100vw;
     height: 100vh;
     display: grid;

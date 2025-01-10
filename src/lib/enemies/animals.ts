@@ -7,13 +7,13 @@ import antSprite from "$lib/assets/animals/ant.jpg?enhanced";
 export const animalEnemies: Record<string, EnemyStats> = {
   dog: {
     stringComplexity: 5,
-    regeneration: 0,
+    regeneration: 0.15,
     health: 150,
     speed: 0.8,
     damage: 30,
     armor: 10,
     size: 4,
-    spawn: 5,
+    spawn: 2,
     resistance: {
       debuff: 10,
       stun: -10,
@@ -29,13 +29,13 @@ export const animalEnemies: Record<string, EnemyStats> = {
   },
   bear: {
     stringComplexity: 8,
-    regeneration: 10,
+    regeneration: 0.5,
     health: 200,
     speed: 0.5,
     damage: 40,
     armor: 15,
     size: 6,
-    spawn: 4,
+    spawn: 1,
     resistance: {
       debuff: 5,
       stun: 10,
@@ -51,13 +51,13 @@ export const animalEnemies: Record<string, EnemyStats> = {
   },
   snake: {
     stringComplexity: 3,
-    regeneration: 0,
+    regeneration: 0.7,
     health: 100,
     speed: 0.9,
     damage: 15,
     armor: 5,
     size: 3,
-    spawn: 7,
+    spawn: 3,
     resistance: {
       debuff: -20,
       stun: -25,
@@ -73,13 +73,13 @@ export const animalEnemies: Record<string, EnemyStats> = {
   },
   bird: {
     stringComplexity: 3,
-    regeneration: 0,
+    regeneration: 0.1,
     health: 65,
     speed: 1.7,
     damage: 25,
     armor: 2,
     size: 2,
-    spawn: 4,
+    spawn: 2,
     resistance: {
       debuff: 0,
       stun: -50,

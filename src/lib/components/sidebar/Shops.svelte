@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { game } from "$lib/game.svelte";
   import { shops } from "$lib/shops/main.svelte";
   import ItemIcon from "../items/ItemIcon.svelte";
 </script>

@@ -2,9 +2,9 @@ export type Difficulty = "easy" | "medium" | "hard";
 
 export const newPlayerStats: PlayerStats = {
   health: 300,
-  regeneration: 5,
+  regeneration: 2,
   speed: 1,
-  damage: 20,
+  damage: 60,
   armor: 0,
   resistance: {
     debuff: 0,

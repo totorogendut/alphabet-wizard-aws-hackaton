@@ -1,7 +1,5 @@
 <script lang="ts">
   import { game } from "$lib/game.svelte";
-
-  // $inspect(game.player.stats);
 </script>
 
 <div class="flex flex-col gap-2 leading-none">

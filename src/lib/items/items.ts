@@ -16,7 +16,7 @@ export const items: Item[] = [
   {
     title: "Syrup of Health",
     description: "Doctors recommendation beverage for wounded patients.",
-    cost: [{ amount: 200, name: "gold" }],
+    cost: [{ amount: 100, name: "gold" }],
     bonusStats: {
       healthMultiplier: 1.07,
       regeneration: 7,
@@ -26,7 +26,7 @@ export const items: Item[] = [
   {
     title: "Adventurer's Sword",
     description: "Get one of these before you brave the dangerous forests.",
-    cost: [{ amount: 6, name: "gem" }],
+    cost: [{ amount: 75, name: "gem" }],
     bonusStats: {
       damage: 30,
       resistance: {

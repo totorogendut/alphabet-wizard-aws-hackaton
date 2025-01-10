@@ -10,18 +10,23 @@
 </script>
 
 <div
-  class="bg-amber-300 absolute"
+  class="absolute flex flex-col items-center"
   style="
     left:{data.pos.x}cqw;top:{data.pos.y}cqh; z-index:{data.size};"
   data-size={data.size}
 >
-  <enhanced:img style="width:{size}cqmin;height:{size}cqmin;" src={data.sprite}>
-  </enhanced:img>
-  <progress
-    value={data.health.current}
-    max={data.health.max}
-    class="absolute -bottom-4 left-0 w-full"
+  <enhanced:img
+    class="block relative"
+    style="width:{size}cqmin;height:{size}cqmin;"
+    src={data.sprite}
   >
-  </progress>
-  <strong>{data.text}</strong>
+  </enhanced:img>
+  <div style="width:{size}cqmin;" class="flex items-center justify-center">
+    <progress value={data.health.current} max={data.health.max} class="w-full">
+    </progress>
+    <span class="text-white absolute text-sm"
+      >{Math.floor(data.health.current)}</span
+    >
+  </div>
+  <strong class="w-max text-center">{data.text}</strong>
 </div>

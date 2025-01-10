@@ -13,6 +13,7 @@ import { untrack } from "svelte";
 
 export class GameState {
   turn = $state(0);
+  score = $state(0);
   arena = $state() as ArenaState;
   player = new Player();
   keyboard = new KeyboardSetup();

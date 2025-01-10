@@ -1,3 +1,5 @@
+import { untrack } from "svelte";
+
 export class LevelingBase {
   #MAX_LEVEL = 100;
   #exp = $state<number>(0);
@@ -6,7 +8,10 @@ export class LevelingBase {
   points = $state(0);
   #effectCleanup = $effect.root(() => {
     $effect(() => {
-      if (this.current > 1) this.levelUp();
+      if (this.current > 1)
+        untrack(() => {
+          this.levelUp();
+        });
     });
   });
 

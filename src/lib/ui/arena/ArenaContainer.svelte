@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Tutorial from "$lib/components/arena/Tutorial.svelte";
   import Enemy from "$lib/components/entity/Enemy.svelte";
   import { game, gameTick } from "$lib/game.svelte";
   import { untrack, type Snippet } from "svelte";
@@ -13,6 +14,10 @@
   {#each game.enemies as data}
     <Enemy {data} />
   {/each}
+
+  {#if game.turn < 5}
+    <Tutorial />
+  {/if}
 </div>
 
 <style lang="postcss">

@@ -15,7 +15,7 @@
         src={itemTooltip.item.icon}
         alt={itemTooltip.item.title}
       />
-      <strong>
+      <strong class="text-yellow-200 leading-tight">
         {itemTooltip.item.title}
       </strong>
     </div>

@@ -2,7 +2,7 @@ import { game, gameTick } from "$lib/game.svelte";
 import { damage } from "$lib/utils/damage";
 import { delay, isNumber } from "$lib/utils/misc";
 
-const availableCommands = ["attack", "upgrade", "gather"] as const;
+const availableCommands = ["attack", "gather"] as const;
 type AvailableCommands = (typeof availableCommands)[number];
 
 export class KeyboardSetup {
@@ -39,7 +39,7 @@ export class KeyboardSetup {
 
   submit() {
     if (this.command === "attack") this.#attack();
-    if (this.command === "upgrade") this.#upgrade();
+    // if (this.command === "upgrade") this.#upgrade();
     if (this.command === "gather") this.#gather();
 
     this.clear();
@@ -86,5 +86,9 @@ export class KeyboardSetup {
 
     if (!isNumber(game.resources[target]?.amount)) return;
     game.resources[target].amount += amount;
+    game.logs.push({
+      text: `${amount} ${target} gathered.`,
+      type: "success",
+    });
   }
 }

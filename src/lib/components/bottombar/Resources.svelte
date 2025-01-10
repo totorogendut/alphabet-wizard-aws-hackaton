@@ -11,11 +11,12 @@
   ]);
 </script>
 
-<div class="flex gap-2 self-end">
+<div class="flex gap-4 self-end">
   {#each resources as { name, amount, icon }}
-    <div class="flex flex-col items-center w-12 font-extrabold text-white">
+    <div class="flex flex-col leading-tight items-center w-12 text-white">
       <img width="20" height="20" src={icon} alt={name} />
-      <span>{amount}</span>
+      <strong class="text-center">{name}</strong>
+      <span class="">{amount}</span>
     </div>
   {/each}
 </div>

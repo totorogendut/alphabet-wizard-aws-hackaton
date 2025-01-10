@@ -34,6 +34,7 @@
         type="text"
         bind:value={game.keyboard.text}
         bind:this={inputEl}
+        placeholder="Command"
       />
       <button class="hidden" type="submit">SUBMIT</button>
       <div class="flex gap-2 text-white/90 mt-2">
