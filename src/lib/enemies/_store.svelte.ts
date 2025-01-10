@@ -62,15 +62,25 @@ export class EnemyEntity {
 
   onDeath() {
     this.remove();
-    game.player.level.exp += 40;
-    game.score += 5;
+    const difficulty = Math.max(0, this.text.length - 10);
+    const loot: Record<string, number> = {
+      exp: 40,
+    };
+    game.player.level.exp += loot.exp;
+    game.score += 5 + this.baseStats.power + difficulty * 2;
 
     const resources = getRandomItems(resourcesList, 1, 3) as string[];
 
     for (const resource of resources) {
-      const amount = 10;
+      const amount = 10 + this.baseStats.power + difficulty * 3;
       game.resources[resource as keyof typeof game.resources].amount += amount;
+      loot[resource] = amount;
     }
+
+    game.logs.push({
+      type: "success",
+      text: `You gain from killing ${this.text}`,
+    });
   }
 
   remove() {

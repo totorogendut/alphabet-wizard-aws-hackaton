@@ -8,7 +8,8 @@ export function moveEnemies() {
   for (let i = 0; i < game.enemies.length; i++) {
     const enemy = game.enemies[i];
     if (enemy.isArrived) continue;
-    enemy.pos.y += enemy.stats.speed;
+    const speed = Math.max(0.5, enemy.stats.speed / game.player.stats.speed);
+    enemy.pos.y += speed;
   }
 }
 

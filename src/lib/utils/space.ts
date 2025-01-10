@@ -20,6 +20,15 @@ export function isOverlappingCircle(
   return distanceSquared < radius * radius;
 }
 
+export function speedDifference(A: number, B: number) {
+  // const difference = Math.abs(A - B); // Calculate the absolute difference
+  const difference = Math.min(0, A - B); // Calculate the absolute difference
+  const decreaseRate = 1; // Adjust this rate (e.g., 0.1 = 10% decrease per unit difference)
+  const newB = B - difference * decreaseRate;
+
+  return newB < 0 ? 0 : newB; // Ensure B doesn't go below 0
+}
+
 export function getEnemyInRadius(
   x: number,
   y: number,

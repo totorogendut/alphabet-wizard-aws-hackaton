@@ -61,7 +61,7 @@ export const items: Item[] = [
   {
     title: "Map",
     description: "Allow you to arrive to a desired location before others do.",
-    cost: [{ amount: 140, name: "stone" }],
+    cost: [{ amount: 200, name: "stone" }],
     bonusStats: {
       speed: 0.25,
       resistance: {

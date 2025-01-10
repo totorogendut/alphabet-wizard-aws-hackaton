@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { game } from "$lib/game.svelte";
+  import { game, GameState, restartGame } from "$lib/game.svelte";
 </script>
 
 <section
@@ -8,6 +8,13 @@
   <h2 class="text-4xl font-extrabold mb-2">Game Over</h2>
   <div class="font-semibold text-xl text-black/60">
     Your score is {game.player.level.exp}
+  </div>
+  <div class="mt-4">
+    <button
+      onclick={restartGame}
+      class="px-6 font-extrabold py-2 rounded-md bg-green-600 text-white/90 active:bg-green-700
+        cursor-pointer">New Game</button
+    >
   </div>
 </section>
 
