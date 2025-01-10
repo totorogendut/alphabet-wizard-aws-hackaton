@@ -11,7 +11,7 @@
   >
     ~Shop~
   </strong>
-  <div class="flex gap-1 items-start">
+  <div class="flex gap-1 items-start flex-wrap">
     {#each shops as item}
       <ItemIcon {...item}></ItemIcon>
     {/each}

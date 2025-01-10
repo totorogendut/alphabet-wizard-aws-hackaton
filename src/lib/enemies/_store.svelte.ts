@@ -1,6 +1,8 @@
 import { game } from "$lib/game.svelte";
+import { resourcesList } from "$lib/resources/main.svelte";
 import { Buffs } from "$lib/ststs/buffs..svelte";
 import { Health } from "$lib/utils/health.svelte";
+import { getRandomItems } from "$lib/utils/misc";
 import { setupPosition, type Position } from "$lib/utils/position.svelte";
 import { applyBonusStats, mergeBonusStats } from "$lib/utils/stats.svelte";
 import { Faker, faker } from "@faker-js/faker";
@@ -62,6 +64,13 @@ export class EnemyEntity {
     this.remove();
     game.player.level.exp += 40;
     game.score += 5;
+
+    const resources = getRandomItems(resourcesList, 1, 3) as string[];
+
+    for (const resource of resources) {
+      const amount = 10;
+      game.resources[resource as keyof typeof game.resources].amount += amount;
+    }
   }
 
   remove() {

@@ -5,6 +5,15 @@ import mineral from "$lib/assets/resources/mineral.svg";
 import gem from "$lib/assets/resources/gem.svg";
 import stone from "$lib/assets/resources/stone.svg";
 
+export const resourcesList = [
+  "gold",
+  "food",
+  "lumber",
+  "mineral",
+  "gem",
+  "stone",
+];
+
 export class ResourcesData {
   gold = $state<Resource>({
     name: "gold",
@@ -38,42 +47,42 @@ export class ResourcesData {
   });
 }
 
-export function setupResources() {
-  const data = $state([
-    {
-      name: "gold",
-      amount: 150,
-      icon: gold,
-    },
-    {
-      name: "lumber",
-      amount: 0,
-      icon: lumber,
-    },
-    {
-      name: "mineral",
-      amount: 0,
-      icon: mineral,
-    },
-    {
-      name: "gem",
-      amount: 0,
-      icon: gem,
-    },
-    {
-      name: "stone",
-      amount: 0,
-      icon: stone,
-    },
-    {
-      name: "food",
-      amount: 100,
-      icon: food,
-    },
-  ]);
-  return data;
+// export function setupResources() {
+//   const data = $state([
+//     {
+//       name: "gold",
+//       amount: 150,
+//       icon: gold,
+//     },
+//     {
+//       name: "lumber",
+//       amount: 0,
+//       icon: lumber,
+//     },
+//     {
+//       name: "mineral",
+//       amount: 0,
+//       icon: mineral,
+//     },
+//     {
+//       name: "gem",
+//       amount: 0,
+//       icon: gem,
+//     },
+//     {
+//       name: "stone",
+//       amount: 0,
+//       icon: stone,
+//     },
+//     {
+//       name: "food",
+//       amount: 100,
+//       icon: food,
+//     },
+//   ]);
+//   return data;
 
-  function del() {
-    // const index = game.resources.findIndex((res) => res.name === name);
-  }
-}
+//   function del() {
+//     // const index = game.resources.findIndex((res) => res.name === name);
+//   }
+// }

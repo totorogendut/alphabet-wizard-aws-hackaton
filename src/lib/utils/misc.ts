@@ -15,3 +15,13 @@ export async function delay(seconds: number) {
 export function isNumber(value: unknown): boolean {
   return typeof value === "number" && Number.isFinite(value);
 }
+
+export function getRandomItems(array: Array<unknown>, min = 1, max = 2) {
+  if (array.length < min) {
+    throw new Error("Array must have at least 'min' items.");
+  }
+
+  const count = Math.floor(Math.random() * (max - min + 1)) + min; // Random count between min and max
+  const shuffled = [...array].sort(() => 0.5 - Math.random()); // Shuffle the array
+  return shuffled.slice(0, Math.min(count, array.length)); // Return the desired number of items
+}

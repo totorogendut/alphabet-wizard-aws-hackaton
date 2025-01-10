@@ -5,7 +5,7 @@
 
 {#if itemTooltip.item}
   <div
-    class="w-52 p-4 bg-black/40 rounded-md fixed z-50 backdrop-blur-md"
+    class="w-56 p-4 bg-black/40 rounded-md fixed z-50 backdrop-blur-md"
     style="top: anchor({itemTooltip.anchor} top); right: calc(anchor(--sidebar left) + 1em)"
   >
     <div class="flex gap-4">
