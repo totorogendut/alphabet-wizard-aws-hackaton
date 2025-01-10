@@ -11,24 +11,24 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-auto": "^3.3.1",
 		"@sveltejs/adapter-cloudflare": "^5.0.0",
-		"@sveltejs/adapter-static": "^3.0.6",
-		"@sveltejs/enhanced-img": "^0.4.1",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^4.0.0",
-		"@tailwindcss/vite": "^4.0.0-alpha.31",
-		"@types/node": "^22.8.7",
-		"svelte": "^5.9.0",
-		"svelte-check": "^4.0.0",
-		"tailwindcss": "^4.0.0-alpha.31",
-		"typescript": "^5.6.3",
-		"vite": "^5.0.3",
-		"vitest": "^2.1.4"
+		"@sveltejs/adapter-static": "^3.0.8",
+		"@sveltejs/enhanced-img": "^0.4.4",
+		"@sveltejs/kit": "^2.15.2",
+		"@sveltejs/vite-plugin-svelte": "^5.0.3",
+		"@tailwindcss/vite": "^4.0.0-beta.9",
+		"@types/node": "^22.10.5",
+		"svelte": "^5.17.3",
+		"svelte-check": "^4.1.3",
+		"tailwindcss": "^4.0.0-beta.9",
+		"typescript": "^5.7.3",
+		"vite": "^6.0.7",
+		"vitest": "^2.1.8"
 	},
 	"dependencies": {
-		"@faker-js/faker": "^9.2.0",
-		"chalk": "^5.3.0",
+		"@faker-js/faker": "^9.3.0",
+		"chalk": "^5.4.1",
 		"nanoid": "^5.0.9"
 	}
 }

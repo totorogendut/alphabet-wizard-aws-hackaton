@@ -8,11 +8,21 @@
 
 <div class="flex p-4 gap-2">
   <button
-    class="bg-amber-200 rounded-md py-1 px-4"
+    class={[
+      "rounded-md py-1 px-4",
+      selected === "logs"
+        ? "bg-amber-700 text-white"
+        : "bg-amber-100 hover:brightness-90 cursor-pointer",
+    ]}
     onclick={() => (selected = "logs")}>Logs</button
   >
   <button
-    class="bg-amber-200 rounded-md py-1 px-4"
+    class={[
+      "rounded-md py-1 px-4",
+      selected === "stats"
+        ? "bg-amber-700 text-white"
+        : "bg-amber-100 hover:brightness-90 cursor-pointer",
+    ]}
     onclick={() => (selected = "stats")}>Bonus Stats</button
   >
 </div>
