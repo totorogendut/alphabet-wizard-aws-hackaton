@@ -7,9 +7,11 @@
     attribute is rare but it lower the time for enemies to reach you.`,
     "Killing enemies with longer names give you more exp and resources.",
     `It is a good idea to gather resources at the beginning of the game
-    so you can kill and defend enemies easier.`,
+    for early items so you can kill and defend enemies easier.`,
     "Beware of snakes! They hurt a lot once they get to bite you!",
     "Birds sure are fast but with they can easily be killed with only one sword",
+    `This is a turn-based game, you don't get punished for playing the game slowly!
+    Carefully type the command, take it slowly, because a single typo can cost you dearly.`,
   ];
 </script>
 
