@@ -4,7 +4,7 @@
 <section
   class="absolute top-44 left-24 p-6 px-8 bg-white/40 rounded-md w-[70%] max-w-[700px]"
 >
-  <h2 class="text-4xl font-extrabold mb-2">How to play</h2>
+  <h2 class="text-4xl font-extrabold mb-4">How to play</h2>
   <ol class="leading-tight flex flex-col gap-2 list-decimal">
     <li>
       Type <kbd>gather</kbd> followed by the name of resource to gather them. Buy
@@ -22,11 +22,16 @@
       resources) goes down to zero!
     </li>
     <li>
-      This is not a complete game! Many features like spells and buffs mechanism
-      simply don't land on the hackaton due to time constraint. I'll consider
-      completing it if there's enough interest after the hackaton is over.
+      <strong>NOTE:</strong> This is not the final version of the game! Many features
+      like spells and buffs mechanism simply don't land on the hackaton due to time
+      constraint. I'll consider completing it if there's enough interest after the
+      hackaton is over.
     </li>
   </ol>
+  <div class="mt-4">
+    <em class="text-black/60">enjoy the game </em>
+    😎
+  </div>
 </section>
 
 <style>
