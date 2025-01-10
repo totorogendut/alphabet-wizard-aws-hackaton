@@ -1,6 +1,7 @@
 import { game } from "$lib/game.svelte";
 import { resourcesList } from "$lib/resources/main.svelte";
 import { Buffs } from "$lib/ststs/buffs..svelte";
+import { damage } from "$lib/utils/damage";
 import { Health } from "$lib/utils/health.svelte";
 import { getRandomItems } from "$lib/utils/misc";
 import { setupPosition, type Position } from "$lib/utils/position.svelte";
@@ -56,7 +57,9 @@ export class EnemyEntity {
   }
 
   attack() {
-    game.player.health.current -= this.stats.damage;
+    const { armor } = game.player.stats;
+    // TODO - damage type and apply resistances
+    game.player.health.current -= damage(this.stats.damage).armor(armor).taken;
     this.remove();
   }
 
