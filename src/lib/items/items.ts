@@ -1,6 +1,3 @@
-import Shield from "$lib/assets/icons/miscs/item101.png";
-import Ring from "$lib/assets/icons/miscs/item102.png";
-
 export const items: Item[] = [
   {
     title: "Shield",
@@ -14,28 +11,28 @@ export const items: Item[] = [
         debuff: 6,
       },
     },
-    icon: Shield,
+    icon: (await import("$lib/assets/items/armor.svg")).default,
   },
   {
-    title: "Ring of Health",
-    description: "Doctors recommendation trinket for wounded patients.",
+    title: "Syrup of Health",
+    description: "Doctors recommendation beverage for wounded patients.",
     cost: [{ amount: 200, name: "gold" }],
     bonusStats: {
       healthMultiplier: 1.07,
       regeneration: 7,
     },
-    icon: Ring,
+    icon: (await import("$lib/assets/items/potion.svg")).default,
   },
   {
-    title: "Magick Ring",
-    description: "Basic ring popular with mage apprentices.",
-    cost: [{ amount: 6, name: "amber" }],
+    title: "Adventurer's Sword",
+    description: "Get one of these before you brave the dangerous forests.",
+    cost: [{ amount: 6, name: "gem" }],
     bonusStats: {
       damage: 30,
       resistance: {
         debuff: 30,
       },
     },
-    icon: Ring,
+    icon: (await import("$lib/assets/items/sword.svg")).default,
   },
 ];

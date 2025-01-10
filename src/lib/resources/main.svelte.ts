@@ -1,9 +1,9 @@
-import gold from "$lib/assets/icons/resources/gold.png";
-import lumber from "$lib/assets/icons/resources/lumber.png";
-import food from "$lib/assets/icons/resources/food.png";
-import quartz from "$lib/assets/icons/resources/quartz.png";
-import amber from "$lib/assets/icons/resources/amber.png";
-import stone from "$lib/assets/icons/resources/stone.png";
+import gold from "$lib/assets/resources/gold.svg";
+import lumber from "$lib/assets/resources/lumber.svg";
+import food from "$lib/assets/resources/food.svg";
+import mineral from "$lib/assets/resources/mineral.svg";
+import gem from "$lib/assets/resources/gem.svg";
+import stone from "$lib/assets/resources/stone.svg";
 
 export class ResourcesData {
   gold = $state<Resource>({
@@ -21,15 +21,15 @@ export class ResourcesData {
     amount: 1000,
     icon: lumber,
   });
-  quartz = $state<Resource>({
-    name: "quartz",
+  mineral = $state<Resource>({
+    name: "mineral",
     amount: 1000,
-    icon: quartz,
+    icon: mineral,
   });
-  amber = $state<Resource>({
-    name: "amber",
+  gem = $state<Resource>({
+    name: "gem",
     amount: 1000,
-    icon: amber,
+    icon: gem,
   });
   stone = $state<Resource>({
     name: "stone",
@@ -51,14 +51,14 @@ export function setupResources() {
       icon: lumber,
     },
     {
-      name: "quartz",
+      name: "mineral",
       amount: 0,
-      icon: quartz,
+      icon: mineral,
     },
     {
-      name: "amber",
+      name: "gem",
       amount: 0,
-      icon: amber,
+      icon: gem,
     },
     {
       name: "stone",

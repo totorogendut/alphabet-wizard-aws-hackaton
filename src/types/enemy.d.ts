@@ -3,6 +3,8 @@ interface EnemyStats extends BaseStats {
   sprite: string | Picture; // starts with /sprites/<type>/<key>.png
   size: number; // between 2 ~ 6
   spawn: number; // between 4 ~ 10
+  type: string;
+  subType: string;
   /**
    * The less the spawn stats the more health and damage it has. The
    * opposite is also aplied, the more spawn stats the less health it has.

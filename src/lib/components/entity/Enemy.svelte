@@ -23,4 +23,5 @@
     class="absolute -bottom-4 left-0 w-full"
   >
   </progress>
+  <strong>{data.text}</strong>
 </div>

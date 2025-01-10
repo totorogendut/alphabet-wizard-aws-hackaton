@@ -5,8 +5,8 @@
     game.resources.gold,
     game.resources.lumber,
     game.resources.stone,
-    game.resources.amber,
-    game.resources.quartz,
+    game.resources.gem,
+    game.resources.mineral,
     game.resources.food,
   ]);
 </script>

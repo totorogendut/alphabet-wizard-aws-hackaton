@@ -1,7 +1,8 @@
 import { game, gameTick } from "$lib/game.svelte";
-import { delay } from "$lib/utils/misc";
+import { damage } from "$lib/utils/damage";
+import { delay, isNumber } from "$lib/utils/misc";
 
-const availableCommands = ["spell", "upgrade", "resource"] as const;
+const availableCommands = ["attack", "upgrade", "gather"] as const;
 type AvailableCommands = (typeof availableCommands)[number];
 
 export class KeyboardSetup {
@@ -37,9 +38,9 @@ export class KeyboardSetup {
   readonly isEmpty: boolean = $derived(!this.text.length);
 
   submit() {
-    if (this.command === "spell") this.#spell();
+    if (this.command === "attack") this.#attack();
     if (this.command === "upgrade") this.#upgrade();
-    if (this.command === "resource") this.#resource();
+    if (this.command === "gather") this.#gather();
 
     this.clear();
   }
@@ -61,14 +62,29 @@ export class KeyboardSetup {
     this.text = "";
   }
 
-  #spell() {
-    const spellName = this.args[1];
-    const target = this.args[2];
+  #attack() {
+    const target = this.args.slice(1).join(" ").trim().toLowerCase();
+    const enemyIndex = game.enemies.findIndex((e) => e.text === target);
+
+    if (enemyIndex === -1) return;
+    const stats = game.enemies[enemyIndex].stats;
+    const finalDamage = damage(game.player.stats.damage).armor(
+      stats.armor
+    ).taken;
+    game.enemies[enemyIndex].health.current -= finalDamage;
+    game.logs.push({
+      text: `You deal ${finalDamage} to ${target}.`,
+      type: "battle",
+    });
   }
   #upgrade() {
     const target = this.args[1];
   }
-  #resource() {
-    const target = this.args[1];
+  #gather() {
+    const target = this.args[1] as keyof typeof game.resources;
+    const amount = 25;
+
+    if (!isNumber(game.resources[target]?.amount)) return;
+    game.resources[target].amount += amount;
   }
 }

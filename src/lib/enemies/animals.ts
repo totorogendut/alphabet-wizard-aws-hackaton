@@ -1,11 +1,11 @@
-import wolfSprite from "$lib/assets/animals/wolf.webp?enhanced";
+import dogSprite from "$lib/assets/animals/wolf.webp?enhanced";
 import bearSprite from "$lib/assets/animals/bear.webp?enhanced";
-import eagleSprite from "$lib/assets/animals/eagle.jpg?enhanced";
+import birdSprite from "$lib/assets/animals/eagle.jpg?enhanced";
 import snakeSprite from "$lib/assets/animals/snake.jpg?enhanced";
 import antSprite from "$lib/assets/animals/ant.jpg?enhanced";
 
 export const animalEnemies: Record<string, EnemyStats> = {
-  wolf: {
+  dog: {
     stringComplexity: 5,
     regeneration: 0,
     health: 150,
@@ -23,7 +23,9 @@ export const animalEnemies: Record<string, EnemyStats> = {
       poison: -15,
       physical: 5,
     },
-    sprite: wolfSprite,
+    sprite: dogSprite,
+    type: "animal",
+    subType: "dog",
   },
   bear: {
     stringComplexity: 8,
@@ -44,6 +46,8 @@ export const animalEnemies: Record<string, EnemyStats> = {
       physical: 7,
     },
     sprite: bearSprite,
+    type: "animal",
+    subType: "bear",
   },
   snake: {
     stringComplexity: 3,
@@ -64,28 +68,10 @@ export const animalEnemies: Record<string, EnemyStats> = {
       physical: 3,
     },
     sprite: snakeSprite,
+    type: "animal",
+    subType: "snake",
   },
-  ant: {
-    stringComplexity: 3,
-    regeneration: 0,
-    health: 40,
-    speed: 0.6,
-    damage: 12,
-    armor: 0,
-    size: 1,
-    spawn: 12,
-    resistance: {
-      debuff: -20,
-      stun: -25,
-      fire: -20,
-      cold: 20,
-      lightning: 15,
-      poison: 50,
-      physical: 0,
-    },
-    sprite: antSprite,
-  },
-  eagle: {
+  bird: {
     stringComplexity: 3,
     regeneration: 0,
     health: 65,
@@ -103,6 +89,8 @@ export const animalEnemies: Record<string, EnemyStats> = {
       poison: -20,
       physical: 3,
     },
-    sprite: eagleSprite,
+    sprite: birdSprite,
+    type: "animal",
+    subType: "bird",
   },
 };

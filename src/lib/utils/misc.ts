@@ -11,3 +11,7 @@ export function mergeArray<T>(...arr: T[][]): T[] {
 export async function delay(seconds: number) {
   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 }
+
+export function isNumber(value: unknown): boolean {
+  return typeof value === "number" && Number.isFinite(value);
+}
